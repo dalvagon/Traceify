@@ -1,0 +1,97 @@
+@import "/src/scss/colors";
+@import "/src/scss/dimensions";
+@import "/src/scss/buttons";
+
+.container {
+    width: 100%;
+    display: flex;
+
+    .title-container {
+        width: 70%;
+        color: $primary;
+        padding: 70px;
+        background-image: $gradient1;
+        border-radius: 10px;
+        z-index: 1;
+        margin: 10px;
+
+        .supratitle {
+            font-size: 15px;
+        }
+
+        .title {
+            font-size: 70px;
+        }
+
+        .for-manager {
+            background-image: none;
+            font-size: 15px;
+            margin-top: 10px;
+            border-radius: 10px;
+            color: $primary;
+            padding-left: 10px;
+            display: flex;
+            align-items: center;
+
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .card {
+        width: 30%;
+        background-image: $gradient2;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px;
+    }
+}
+
+@media screen and (max-width: $max-width) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .title-container {
+            width: 100%;
+
+            .title {
+                font-size: 50px;
+            }
+
+            .for-manager {
+                font-size: 15px;
+                margin-top: 10px;
+                border-radius: 10px;
+                padding: 10px;
+
+                i {
+                    color: $secondary;
+                    margin-left: 10px;
+                    transition: all ease-in-out 300ms;
+                }
+
+                &:hover {
+                    cursor: pointer;
+
+                    i {
+                        margin-left: 20px;
+                    }
+                }
+            }
+        }
+
+        .card {
+            width: 100%;
+            margin: auto;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+    }
+
+
+}

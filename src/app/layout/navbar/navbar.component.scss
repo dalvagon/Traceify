@@ -1,0 +1,53 @@
+@use "/src/scss/buttons";
+@import "/src/scss/colors";
+@import "/src/scss/dimensions";
+
+.navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    margin: 20px auto;
+    height: 70px;
+    z-index: 100 !important;
+    background-color: $primary;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding-left: 10%;
+    padding-right: 10%;
+
+    .initial {
+        color: $primary;
+        padding: 5px;
+        margin-left: 10px;
+        font-size: 35px;
+        background-image: $gradient1;
+        border-radius: 10px;
+    }
+
+    .title {
+        color: $secondary;
+        margin: 10px;
+        margin-right: auto;
+        font-size: 30px;
+        letter-spacing: 10px;
+    }
+
+    .account {
+        color: $secondary;
+        margin: 10px;
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: $max-width) {
+    .navbar {
+        .initial {
+            font-size: 15px;
+        }
+
+        .title {
+            font-size: 20px;
+        }
+    }
+}

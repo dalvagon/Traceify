@@ -1,0 +1,43 @@
+@import "/src/scss/colors";
+
+
+%button {
+    outline: none;
+    width: auto;
+    box-shadow: none;
+    margin: 10px;
+    border: none;
+
+    &:hover {
+        @extend %button;
+    }
+
+    &:not(:focus) {
+        @extend %button;
+    }
+}
+
+.button-filled {
+    @extend %button;
+    background-color: $secondary !important;
+    color: $primary !important;
+}
+
+.button-outline {
+    @extend %button;
+    background-color: $primary !important;
+    color: $secondary !important;
+    border: 1px solid $secondary !important;
+}
+
+.button-filled-reversed {
+    @extend %button;
+    background-color: $primary !important;
+    color: $secondary !important;
+}
+
+.button-outline-reversed {
+    @extend %button;
+    background-color: $secondary !important;
+    color: $primary !important;
+}

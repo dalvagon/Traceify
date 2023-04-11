@@ -1,0 +1,9 @@
+<div class="navbar">
+    <div class="initial" [routerLink]="''">T</div>
+    <div class="title" [routerLink]="''">RACEIFY</div>
+    <button type="button" pButton label="Sepolia testnet" class="button-outline"
+        (click)="goToSepoliaWebsite()"></button>
+    <div *ngIf="!connectWalletButtonVisible" class="account">{{ account }}</div>
+    <button *ngIf="connectWalletButtonVisible" type="button" pButton class="button-filled" label="Connect wallet"
+        (click)="requestWallet()" icon="pi pi-wallet"></button>
+</div>
