@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
+import { keccak256, toUtf8Bytes } from 'ethers/lib/utils';
 import { contract } from 'src/contracts/contract';
 
 @Injectable({
@@ -58,6 +59,10 @@ export class ContractsService {
   public async isAdmin() {
     const signer = await this.getSigner();
 
+    if (typeof signer === 'undefined') {
+      return false;
+    }
+
     const contractInstance = new ethers.Contract(
       contract.address,
       contract.abi,
@@ -66,6 +71,26 @@ export class ContractsService {
 
     const address = await signer.getAddress();
     const canActivate = await contractInstance['hasRole']("0x0000000000000000000000000000000000000000000000000000000000000000", address);
+
+    return canActivate;
+  }
+
+  public async hasRole(role: any) {
+    const signer = await this.getSigner();
+
+    if (typeof signer === 'undefined') {
+      return false;
+    }
+
+    const contractInstance = new ethers.Contract(
+      contract.address,
+      contract.abi,
+      signer
+    );
+
+    const address = await signer.getAddress();
+    const roleHash = keccak256(toUtf8Bytes(role));
+    const canActivate = await contractInstance['hasRole'](roleHash, address);
 
     return canActivate;
   }

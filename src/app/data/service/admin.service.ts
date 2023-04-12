@@ -18,7 +18,6 @@ export class AdminService {
   }
 
   public async isAdmin() {
-    const isAdmin = await this.contractsService.isAdmin();
-    return isAdmin;
+    return await this.contractsService.isAdmin();
   }
 }

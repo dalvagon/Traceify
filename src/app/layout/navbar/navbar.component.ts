@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
+import { AdminService } from 'src/app/data/service/admin.service';
+import { ManagerService } from 'src/app/data/service/manager.service';
 import { WalletService } from 'src/app/data/service/wallet.service';
 
 @Component({
@@ -14,6 +16,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   constructor(
     private walletService: WalletService,
+    private adminService: AdminService,
+    private managerService: ManagerService,
     private ngZone: NgZone,
     private router: Router
   ) { }
@@ -30,18 +34,21 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.walletService.connectWallet();
 
       this.accountSubscription = this.walletService.accountChange$.subscribe(
-        (account: any) => {
+        async (account: any) => {
+          if (account !== null) {
+            const isAdmin = await this.adminService.isAdmin();
+            const isManager = await this.managerService.isManager();
+            if (!isAdmin && !isManager && (this.router.url.includes('/manager') || this.router.url.includes('/admin'))) {
+              this.router.navigate(['/']);
+            }
+          }
+
           this.ngZone.run(() => {
             this.account = account;
             this.connectWalletButtonVisible = account === null;
-            // if (this.account !== null) {
-            //   this.router.navigate(['/add-manager']);
-            // }
           });
         }
       );
-
-
     }
   }
 

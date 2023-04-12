@@ -1,0 +1,36 @@
+@import 'src/scss/colors';
+
+
+.container {
+    width: 100%;
+    border-radius: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    background-color: $tertiary;
+
+    .left {
+        width: 40%;
+        padding: 20px;
+
+        .title {
+            font-size: 20px;
+            color: $primary;
+        }
+    }
+
+    .right {
+        width: 60%;
+        color: $secondary;
+        background-image: $gradient1;
+        border-radius: 10px;
+        padding: 20px;
+
+        .text {
+            height: 100%;
+            font-size: 30px;
+            color: $primary;
+        }
+    }
+}
