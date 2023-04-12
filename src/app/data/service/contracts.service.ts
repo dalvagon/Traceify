@@ -30,7 +30,7 @@ export class ContractsService {
    * Create a provider using the ethereum object injected by metamask
    */
   public createProvider() {
-    this.provider = new ethers.BrowserProvider(this.ethereum);
+    this.provider = new ethers.providers.Web3Provider(this.ethereum);
   }
 
   /**
@@ -45,22 +45,29 @@ export class ContractsService {
    * Returns the signer if there is an account connected
    * @returns the signer
    */
-  public getSigner() {
+  private getSigner() {
     return this.ethereum
       .request({ method: 'eth_accounts' })
-      .then((accounts: any) => {
+      .then(async (accounts: any) => {
         if (accounts.length > 0) {
-          return this.provider.getSigner();
+          return await this.provider.getSigner(accounts[0]);
         }
       });
   }
 
-  public getContractAddress() {
-    return contract.address;
-  }
+  public async isAdmin() {
+    const signer = await this.getSigner();
 
-  public getContractAbi() {
-    return contract.abi;
+    const contractInstance = new ethers.Contract(
+      contract.address,
+      contract.abi,
+      signer
+    );
+
+    const address = await signer.getAddress();
+    const canActivate = await contractInstance['hasRole']("0x0000000000000000000000000000000000000000000000000000000000000000", address);
+
+    return canActivate;
   }
 
   public async addManager(address: string) {
@@ -72,11 +79,11 @@ export class ContractsService {
       signer
     );
 
-    await contractInstance['addManager'](address);
+    await contractInstance.addManager(address);
   }
 
   public async createProduct(barcode: any, informationHash: any, parentBarcodes: any) {
-    const signer = await this.getSigner();
+    const signer = this.getSigner();
 
     const contractInstance = new ethers.Contract(
       contract.address,

@@ -1,3 +1,4 @@
+import { ContractsService } from 'src/app/data/service/contracts.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit {
-  constructor() {}
+  constructor(private contractsService: ContractsService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

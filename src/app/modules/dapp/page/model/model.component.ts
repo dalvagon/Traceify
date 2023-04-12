@@ -27,15 +27,15 @@ export class ModelComponent implements OnInit {
   private mouseX = 0;
   private mouseY = 0;
 
-  constructor(private ngZone: NgZone) {}
+  constructor(private ngZone: NgZone) { }
 
   /**
    * On init, set the dimensions of the canvas and create the scene then animate it
    */
   ngOnInit(): void {
-    this.clientHeight = this.canvasRef.nativeElement.clientHeight;
-
     if (this.canvasRef) {
+      this.clientHeight = this.canvasRef.nativeElement.clientHeight;
+
       this.setDimensions();
       this.createScene();
       this.animate();

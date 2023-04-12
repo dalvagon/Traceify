@@ -21,6 +21,6 @@ export class CreateProductComponent implements OnInit {
   }
 
   upload() {
-    this.ipfs.uploadData("Hello World");
+
   }
 }

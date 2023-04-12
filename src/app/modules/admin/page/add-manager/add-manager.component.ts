@@ -11,7 +11,6 @@ export class AddManagerComponent implements OnInit {
   constructor(private contractsService: ContractsService) { }
 
   ngOnInit(): void {
-
   }
 
   addManager(address: any) {

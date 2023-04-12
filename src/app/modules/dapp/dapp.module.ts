@@ -4,11 +4,9 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { LandingComponent } from './page/landing/landing.component';
 import { ModelComponent } from './page/model/model.component';
-import { AddManagerComponent } from './page/add-manager/add-manager.component';
-import { CreateProductComponent } from './page/create-product/create-product.component';
 
 @NgModule({
-  declarations: [LandingComponent, ModelComponent, AddManagerComponent, CreateProductComponent],
+  declarations: [LandingComponent, ModelComponent],
   imports: [CommonModule, DappRoutingModule, ButtonModule],
 })
 export class DappModule { }

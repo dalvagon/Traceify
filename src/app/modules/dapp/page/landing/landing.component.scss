@@ -5,6 +5,7 @@
 .container {
     width: 100%;
     display: flex;
+    flex-direction: row;
 
     .title-container {
         width: 70%;
@@ -24,14 +25,10 @@
         }
 
         .for-manager {
-            background-image: none;
             font-size: 15px;
             margin-top: 10px;
-            border-radius: 10px;
             color: $primary;
             padding-left: 10px;
-            display: flex;
-            align-items: center;
 
             &:hover {
                 cursor: pointer;
@@ -49,18 +46,27 @@
     }
 }
 
+@media screen and (max-width: $max-width + 100) {
+    .container {
+        .title-container {
+            .title {
+                font-size: 50px;
+            }
+        }
+    }
+}
+
 @media screen and (max-width: $max-width) {
     .container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
 
         .title-container {
             width: 100%;
 
             .title {
-                font-size: 50px;
+                font-size: 40px;
             }
 
             .for-manager {
@@ -75,13 +81,7 @@
                     transition: all ease-in-out 300ms;
                 }
 
-                &:hover {
-                    cursor: pointer;
 
-                    i {
-                        margin-left: 20px;
-                    }
-                }
             }
         }
 
@@ -92,6 +92,4 @@
             margin-bottom: 20px;
         }
     }
-
-
 }

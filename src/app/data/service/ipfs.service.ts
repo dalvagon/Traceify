@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { create } from 'ipfs-http-client';
 import { environment } from 'src/environments/environment';
+import { Buffer } from 'buffer';
 
 @Injectable({
   providedIn: 'root',

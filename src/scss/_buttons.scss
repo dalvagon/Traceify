@@ -1,5 +1,5 @@
 @import "/src/scss/colors";
-
+@import "/src/scss/dimensions";
 
 %button {
     outline: none;
@@ -40,4 +40,10 @@
     @extend %button;
     background-color: $secondary !important;
     color: $primary !important;
+}
+
+@media screen and (max-width: $max-width) {
+    %button {
+        font-size: 10px;
+    }
 }
