@@ -11,4 +11,21 @@ export class ManagerService {
     return await this.contractsService.hasRole("MANAGER_ROLE");
   }
 
+  public async createProduct(barcode: any, informationHash: any, parentBarcodes: any) {
+    const contract = await this.contractsService.getContractInstance();
+
+    if (typeof contract !== 'undefined') {
+      contract.on("ProductCreated", (barcode: any, informationHash: any, parentBarcodes: any) => {
+        console.log(barcode, informationHash, parentBarcodes);
+      });
+
+      await contract['createProduct'](barcode, informationHash, parentBarcodes)
+        .then(() => {
+          console.log("Product created successfully");
+        }
+        ).catch((error: any) => {
+          console.log(error);
+        });
+    }
+  }
 }

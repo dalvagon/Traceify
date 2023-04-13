@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
-import { keccak256, toUtf8Bytes } from 'ethers/lib/utils';
 import { contract } from 'src/contracts/contract';
 
 @Injectable({
@@ -56,76 +55,27 @@ export class ContractsService {
       });
   }
 
-  public async isAdmin() {
+  public async getContractInstance() {
     const signer = await this.getSigner();
 
     if (typeof signer === 'undefined') {
-      return false;
+      return;
     }
 
-    const contractInstance = new ethers.Contract(
-      contract.address,
-      contract.abi,
-      signer
-    );
-
-    const address = await signer.getAddress();
-    const canActivate = await contractInstance['hasRole']("0x0000000000000000000000000000000000000000000000000000000000000000", address);
-
-    return canActivate;
+    return new ethers.Contract(contract.address, contract.abi, signer);
   }
 
   public async hasRole(role: any) {
-    const signer = await this.getSigner();
+    const contract = await this.getContractInstance();
 
-    if (typeof signer === 'undefined') {
+    if (typeof contract === 'undefined') {
       return false;
     }
 
-    const contractInstance = new ethers.Contract(
-      contract.address,
-      contract.abi,
-      signer
-    );
-
-    const address = await signer.getAddress();
-    const roleHash = keccak256(toUtf8Bytes(role));
-    const canActivate = await contractInstance['hasRole'](roleHash, address);
+    const address = await contract.signer.getAddress();
+    const roleHash = await contract[role]();
+    const canActivate = await contract['hasRole'](roleHash, address);
 
     return canActivate;
-  }
-
-  public async addManager(address: string) {
-    const signer = await this.getSigner();
-
-    const contractInstance = new ethers.Contract(
-      contract.address,
-      contract.abi,
-      signer
-    );
-
-    await contractInstance.addManager(address);
-  }
-
-  public async createProduct(barcode: any, informationHash: any, parentBarcodes: any) {
-    const signer = this.getSigner();
-
-    const contractInstance = new ethers.Contract(
-      contract.address,
-      contract.abi,
-      signer
-    );
-
-    contractInstance.on("ProductCreated", (barcode: any, informationHash: any, parentBarcodes: any) => {
-      console.log(barcode, informationHash, parentBarcodes);
-    });
-
-    await contractInstance['createProduct'](barcode, informationHash, parentBarcodes)
-      .then(() => {
-        console.log("Product created successfully");
-      }
-      ).catch((error: any) => {
-        console.log(error);
-      });
   }
 }

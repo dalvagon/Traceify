@@ -1,0 +1,21 @@
+@import 'src/scss/colors';
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    color: $secondary;
+    display: flex;
+    flex-direction: row;
+
+    .left {
+        width: 30%;
+        padding: 100px;
+        border: 1px solid $secondary;
+    }
+
+    .right {
+        width: 70%;
+        padding: 100px;
+        border: 1px solid $secondary;
+    }
+}

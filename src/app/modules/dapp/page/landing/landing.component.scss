@@ -3,7 +3,8 @@
 @import "/src/scss/buttons";
 
 .container {
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     display: flex;
     flex-direction: row;
 
@@ -12,7 +13,7 @@
         color: $primary;
         padding: 70px;
         background-image: $gradient1;
-        border-radius: 10px;
+        border-radius: 0%;
         z-index: 1;
         margin: 10px;
 
@@ -40,19 +41,10 @@
     .card {
         width: 30%;
         background-image: $gradient2;
-        border-radius: 10px;
+        border-radius: 0%;
         padding: 20px;
         margin: 10px;
-    }
-}
-
-@media screen and (max-width: $max-width + 100) {
-    .container {
-        .title-container {
-            .title {
-                font-size: 50px;
-            }
-        }
+        color: $primary;
     }
 }
 
@@ -72,7 +64,7 @@
             .for-manager {
                 font-size: 15px;
                 margin-top: 10px;
-                border-radius: 10px;
+                border-radius: 0%;
                 padding: 10px;
 
                 i {

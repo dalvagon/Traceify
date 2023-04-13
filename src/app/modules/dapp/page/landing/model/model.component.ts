@@ -76,7 +76,7 @@ export class ModelComponent implements OnInit {
     this.camera.position.z = 300;
     this.scene.add(this.camera);
 
-    this.light = new THREE.AmbientLight(new THREE.Color('#2F4858'), 0.9);
+    this.light = new THREE.AmbientLight(new THREE.Color('#00955B'), 0.9);
     this.light.position.z = 10;
     this.scene.add(this.light);
 
@@ -122,6 +122,8 @@ export class ModelComponent implements OnInit {
   render() {
     requestAnimationFrame(() => this.render());
 
+    const rx = Math.sin(Date.now() * 0.001) * 0.5;
+
     if (this.model) {
       const width = window.innerWidth;
       const height = window.innerHeight;
@@ -132,6 +134,7 @@ export class ModelComponent implements OnInit {
       this.model.scene.rotation.z = -(ratationX + ratationY) / 2;
       this.model.scene.position.y = (ratationX + ratationY) / 2 - 0.5;
 
+      this.model.scene.rotation.y += -rx;
       // const ratationX = 0.3;
       // const ratationY = 0.01;
       // this.model.scene.rotation.y += -ratationX;

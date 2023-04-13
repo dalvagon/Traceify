@@ -1,1 +1,18 @@
-<p>admin works!</p>
+<div class="container">
+    <div class="left">
+
+    </div>
+
+    <div class="right">
+        <div class="requests">
+            <div class="request" *ngFor="let request of requests">
+                <div class="name">
+                    {{ request.name }}
+                </div>
+                <div class="email">
+                    {{ request.email }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

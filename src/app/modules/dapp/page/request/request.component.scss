@@ -1,36 +1,95 @@
 @import 'src/scss/colors';
-
+@import 'src/scss/dimensions';
+@import 'src/scss/forms';
+@import 'src/scss/buttons';
 
 .container {
-    width: 100%;
-    border-radius: 10px;
-    border-radius: 10px;
-    overflow: hidden;
+    width: 80%;
+    margin: 0 auto;
     display: flex;
     flex-direction: row;
-    background-color: $tertiary;
 
     .left {
-        width: 40%;
-        padding: 20px;
+        width: 70%;
+        padding: 15px;
+        border-right: 1px solid $secondary;
+        color: $secondary;
 
         .title {
-            font-size: 20px;
-            color: $primary;
+            font-size: 35px;
+        }
+
+        .form {
+            margin: auto;
+            width: 70%;
+            height: max-content;
+
+            label {
+                display: block !important;
+                margin-top: 15px !important;
+                margin-bottom: 2px !important;
+                font-size: 12px !important;
+                letter-spacing: 5px;
+            }
+
+            .request-button {
+                display: block;
+                margin: 0 auto !important;
+                margin-top: 10px !important;
+            }
+
+            .error {
+                color: $error;
+            }
+
+            .note {
+                display: block;
+                margin-top: 10px !important;
+            }
         }
     }
 
     .right {
-        width: 60%;
-        color: $secondary;
-        background-image: $gradient1;
-        border-radius: 10px;
+        width: 30%;
+        background-color: $primary;
         padding: 20px;
+        color: $secondary;
+
+        .title {
+            font-size: 25px;
+            padding: 10px;
+            margin-top: 10px;
+
+            i {
+                font-size: 20px;
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+        }
 
         .text {
-            height: 100%;
-            font-size: 30px;
-            color: $primary;
+            font-size: 15px;
+            padding-left: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: $max-width) {
+    .container {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .left,
+    .right {
+        border: none !important;
+        width: 100% !important;
+    }
+
+    .left {
+        .form {
+            width: 70% !important;
         }
     }
 }
