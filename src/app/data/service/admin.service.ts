@@ -40,4 +40,21 @@ export class AdminService {
       return contract['getManagerRequest'](address);
     }
   }
+
+  public async approveManagerRequest(address: string) {
+    const contract = await this.contractsService.getContractInstance();
+
+    if (typeof contract !== 'undefined') {
+      return contract['approveManagerRequest'](address);
+    }
+  }
+
+  public async denyManagerRequest(address: string) {
+    const contract = await this.contractsService.getContractInstance();
+
+    if (typeof contract !== 'undefined') {
+      return contract['denyManagerRequest'](address);
+    }
+  }
+
 }

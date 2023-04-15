@@ -10,7 +10,7 @@
     flex-direction: row;
 
     .left {
-        width: 70%;
+        flex-grow: 1;
         padding: 15px;
         border-right: 1px solid $secondary;
         color: $secondary;

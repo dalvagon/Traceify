@@ -11,10 +11,11 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { LogoComponent } from './layout/logo/logo.component';
 import { MessageService } from 'primeng/api';
+import { TitleComponent } from './layout/title/title.component';
 
 
 @NgModule({
-  declarations: [AppComponent, ContentLayoutComponent, NavbarComponent, FooterComponent, LogoComponent],
+  declarations: [AppComponent, ContentLayoutComponent, NavbarComponent, FooterComponent, LogoComponent, TitleComponent],
   imports: [BrowserModule, AppRoutingModule, ButtonModule, BrowserAnimationsModule, ToastModule],
   providers: [MessageService],
   bootstrap: [AppComponent],

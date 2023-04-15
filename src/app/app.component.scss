@@ -8,3 +8,9 @@
     user-select: none;
     font-weight: bolder;
 }
+
+::ng-deep html,
+body {
+    height: 100%;
+    height: 100vh;
+}

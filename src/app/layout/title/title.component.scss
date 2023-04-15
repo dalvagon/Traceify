@@ -1,0 +1,14 @@
+@import "/src/scss/colors";
+
+.title {
+    display: flex;
+    flex-direction: row;
+
+    .tail {
+        color: $secondary;
+        margin: 10px;
+        font-size: 30px;
+        letter-spacing: 10px;
+        width: max-content;
+    }
+}

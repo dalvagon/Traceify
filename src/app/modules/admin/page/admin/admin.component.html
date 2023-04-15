@@ -1,18 +1,56 @@
 <div class="container">
     <div class="left">
+        <ng-container *ngIf="showPedingRequests">
+            <div class="title">PENDING REQUESTS</div>
+            <div class="pending-requests">
+                <ng-container *ngIf="pendingRequests.length == 0">You don't have any pending manager
+                    requests.</ng-container>
+                <div class="pending-request" *ngFor="let request of pendingRequests">
+                    <div class="header">
+                        <div>
+                            <div class="name">
+                                {{ request.name }}
+                            </div>
+                            <div class="email">
+                                {{ request.email }}
+                            </div>
+                        </div>
+                        <div class="timestamp">
+                            {{ difference(request.timestamp) }}
+                        </div>
+                    </div>
+                    <div class="purpose">
+                        ''{{ request.purpose }}''
+                    </div>
+                    <div class="buttons">
+                        <button type="button" pButton class="button-filled" (click)="approveRequest(request.address)"
+                            label="Approve"></button>
+                        <button type="button" pButton class="button-outline" (click)="rejectRequest(request.address)"
+                            label="Decline"></button>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
 
+        <ng-container *ngIf="showApprovedRequests">
+            <div class="title">APPROVED REQUESTS</div>
+
+            <div class="approved-requests">
+                <ng-container *ngIf="approvedRequests.length == 0">You haven't approved any manager requests
+                    yet.</ng-container>
+            </div>
+        </ng-container>
     </div>
-
     <div class="right">
-        <div class="requests">
-            <div class="request" *ngFor="let request of requests">
-                <div class="name">
-                    {{ request.name }}
-                </div>
-                <div class="email">
-                    {{ request.email }}
-                </div>
+        <div class="menu">
+            <div class="title">DASHBOARD</div>
+            <div class="item" (click)="switchToPendingRequests()" [ngClass]="{'highlighted': showPedingRequests}">
+                <span>Pending requests</span>
+                <div>{{ pendingRequests.length }}</div>
+            </div>
+            <div class="item" (click)="switchToApprovedRequests()" [ngClass]="{'highlighted': showApprovedRequests}">
+                <span>Approved requests</span>
+                <div>{{ approvedRequests.length }}</div>
             </div>
         </div>
     </div>
-</div>

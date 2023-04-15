@@ -3,85 +3,157 @@
 @import "/src/scss/buttons";
 
 .container {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
+    width: 100%;
 
-    .title-container {
-        width: 70%;
-        color: $primary;
-        padding: 70px;
-        background-image: $gradient1;
-        border-radius: 0%;
-        z-index: 1;
-        margin: 10px;
+    .main {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
 
-        .supratitle {
-            font-size: 15px;
-        }
-
-        .title {
-            font-size: 70px;
-        }
-
-        .for-manager {
-            font-size: 15px;
-            margin-top: 10px;
+        .title-container {
+            width: 70%;
             color: $primary;
-            padding-left: 10px;
+            padding: 70px;
+            background-image: $gradient1;
+            border-radius: 0%;
+            z-index: 1;
+
+            .supratitle {
+                font-size: 15px;
+            }
+
+            .title {
+                font-size: 70px;
+            }
+        }
+
+        .model {
+            width: 30%;
+            background-image: $gradient2;
+            border-radius: 0%;
+            padding: 20px;
+            color: $primary;
+            margin-left: 15px;
+        }
+    }
+
+    .button-and-barcode {
+        display: flex;
+        flex-direction: row;
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 150px;
+
+        .barcode {
+            width: 90%;
+            height: 100%;
+            background-color: $secondary;
+            color: $primary;
+            border-radius: 0%;
+            padding: 20px;
+            margin-left: 10px;
+
+            .barcode-title {
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+
+            .barcode-content {
+                height: 150px;
+            }
+        }
+
+        .button {
+            display: block;
+            margin-right: 10px;
+            width: 10%;
+            background-color: $secondary;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all ease-in-out 300ms;
+
+            .button-title {
+                writing-mode: vertical-lr;
+                text-orientation: upright;
+            }
+
+            i {
+                transition: all ease-in-out 300ms;
+            }
 
             &:hover {
                 cursor: pointer;
-                text-decoration: underline;
+                transform: translate(-5px, -5px);
+
+                i {
+                    margin-left: 20px;
+                }
             }
         }
     }
 
-    .card {
-        width: 30%;
-        background-image: $gradient2;
-        border-radius: 0%;
-        padding: 20px;
-        margin: 10px;
+    .stack {
+        width: 80%;
+        margin: 0 auto;
         color: $primary;
+        margin-bottom: 150px;
+        margin-top: 150px;
+        color: $secondary;
+
+        .stack-title {
+            font-size: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stack-itmes {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+
+            .stack-item {
+
+                svg,
+                img {
+                    max-height: 150px;
+                    height: 100%;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
     }
 }
 
+
+
 @media screen and (max-width: $max-width) {
     .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-        .title-container {
-            width: 100%;
+            .title-container {
+                width: 100%;
 
-            .title {
-                font-size: 40px;
-            }
-
-            .for-manager {
-                font-size: 15px;
-                margin-top: 10px;
-                border-radius: 0%;
-                padding: 10px;
-
-                i {
-                    color: $secondary;
-                    margin-left: 10px;
-                    transition: all ease-in-out 300ms;
+                .title {
+                    font-size: 40px;
                 }
-
-
             }
-        }
 
-        .card {
-            width: 100%;
-            margin: auto;
-            margin-top: 10px;
-            margin-bottom: 20px;
+            .model {
+                width: 100%;
+                margin: auto;
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
         }
     }
 }

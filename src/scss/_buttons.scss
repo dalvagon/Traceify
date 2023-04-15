@@ -5,7 +5,6 @@
     outline: none;
     width: auto;
     box-shadow: none;
-    margin: 10px;
     border: none;
     border-radius: 0%;
 
@@ -22,6 +21,7 @@
     @extend %button;
     background-color: $secondary !important;
     color: $primary !important;
+    border: 1px solid $secondary !important;
 }
 
 .button-outline {
@@ -46,5 +46,16 @@
 @media screen and (max-width: $max-width) {
     %button {
         font-size: 10px;
+    }
+}
+
+.link {
+    font-size: 15px;
+    margin-top: 10px;
+    color: $primary;
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
     }
 }

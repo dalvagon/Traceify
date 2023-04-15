@@ -1,4 +1,4 @@
-@use "/src/scss/buttons";
+@import "/src/scss/buttons";
 @import "/src/scss/colors";
 @import "/src/scss/dimensions";
 
@@ -6,8 +6,8 @@
     position: sticky;
     top: 0;
     width: 100%;
-    margin: 20px auto;
-    height: 70px;
+    margin-left: 20px auto;
+    height: 80px;
     z-index: 100 !important;
     background-color: $primary;
     display: flex;
@@ -17,11 +17,7 @@
     padding-right: 10%;
 
     .title {
-        color: $secondary;
-        margin: 10px;
         margin-right: auto;
-        font-size: 30px;
-        letter-spacing: 10px;
     }
 
     .account {

@@ -1,5 +1,5 @@
 export const contract = {
-  address: '0x8657923723dd1A129120937447ffF482320e0657',
+  address: '0x42EEbCFCbe6273EdAc6689612fc501771D1b74E3',
   abi: [
     {
       "anonymous": false,
@@ -162,9 +162,9 @@ export const contract = {
       "name": "getManagerRequest",
       "outputs": [
         {
-          "internalType": "string",
+          "internalType": "address",
           "name": "",
-          "type": "string"
+          "type": "address"
         },
         {
           "internalType": "string",
@@ -180,6 +180,16 @@ export const contract = {
           "internalType": "string",
           "name": "",
           "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",

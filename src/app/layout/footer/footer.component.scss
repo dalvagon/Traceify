@@ -1,9 +1,30 @@
 @import "/src/scss/colors";
 
 .container {
-    width: 100%;
-    color: $secondary;
-    padding: 20px;
-    text-align: center;
+    width: 80%;
+    margin: 0 auto;
     border-top: 1px solid $secondary;
+
+    // .stacks {
+    //     display: flex;
+    //     flex-direction: row;
+    //     justify-content: center;
+    //     margin-bottom: 100px;
+
+    //     .stack {
+    //         margin-top: 30px;
+    //         margin-right: 100px;
+
+    //         .stack-title {
+    //             font-size: 30px;
+    //             margin-bottom: 10px;
+    //             color: $tertiary;
+    //         }
+
+    //         .stack-item {
+    //             font-size: 20px;
+    //             color: $secondary;
+    //         }
+    //     }
+    // }
 }
