@@ -1,6 +1,6 @@
+import { ManagerService } from 'src/app/data/service/manager.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { IpfsService } from 'src/app/data/service/ipfs.service';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-product',
@@ -9,18 +9,25 @@ import { IpfsService } from 'src/app/data/service/ipfs.service';
 })
 export class CreateProductComponent implements OnInit {
   form = this.fb.group({
-    barcode: ['', [Validators.required]],
-    name: ['', [Validators.required]],
-    description: [''],
-    image: [''],
+    uid: new FormControl({ value: '', disabled: false }, { validators: [Validators.required], updateOn: 'change' }),
+    name: new FormControl('', [Validators.required, this.emptyStringValidator]),
+    description: new FormControl('', [Validators.required, this.emptyStringValidator]),
+    image: new FormControl('', [Validators.required, this.emptyStringValidator]),
   });
 
-  constructor(private ipfs: IpfsService, private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private managerService: ManagerService) { }
 
   ngOnInit(): void {
+    this.managerService.generateUid().then((uid: string) => {
+      this.form.controls['uid'].setValue(uid);
+    });
   }
 
-  upload() {
+  submit() {
+    console.log(this.form.value);
+  }
 
+  emptyStringValidator(control: FormControl) {
+    return (control.value || '').trim().length === 0 ? { 'emptyString': true } : null;
   }
 }

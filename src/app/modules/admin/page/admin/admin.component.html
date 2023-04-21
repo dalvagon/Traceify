@@ -5,6 +5,9 @@
             <div class="pending-requests">
                 <ng-container *ngIf="pendingRequests.length == 0">You don't have any pending manager
                     requests.</ng-container>
+                <div class="note" *ngIf="pendingRequests.length != 0">*Note that approved/rejected requests may still
+                    appear
+                    in the inbox until the transaction is completed.</div>
                 <div class="pending-request" *ngFor="let request of pendingRequests">
                     <div class="header">
                         <div>
@@ -38,6 +41,24 @@
             <div class="approved-requests">
                 <ng-container *ngIf="approvedRequests.length == 0">You haven't approved any manager requests
                     yet.</ng-container>
+                <div class="approved-request" *ngFor="let request of approvedRequests">
+                    <div class="header">
+                        <div>
+                            <div class="name">
+                                {{ request.name }}
+                            </div>
+                            <div class="email">
+                                {{ request.email }}
+                            </div>
+                        </div>
+                        <div class="timestamp">
+                            {{ difference(request.timestamp) }}
+                        </div>
+                    </div>
+                    <div class="purpose">
+                        ''{{ request.purpose }}''
+                    </div>
+                </div>
             </div>
         </ng-container>
     </div>

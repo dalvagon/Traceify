@@ -1,5 +1,5 @@
 export const contract = {
-  address: '0x42EEbCFCbe6273EdAc6689612fc501771D1b74E3',
+  address: '0xE2bB677E3FcEa2D042AfC7D5f29c9b3557FDFA33',
   abi: [
     {
       "anonymous": false,
@@ -106,7 +106,7 @@ export const contract = {
       "inputs": [
         {
           "internalType": "bytes32",
-          "name": "barcode",
+          "name": "uid",
           "type": "bytes32"
         },
         {
@@ -116,7 +116,7 @@ export const contract = {
         },
         {
           "internalType": "bytes32[]",
-          "name": "parentBarcodes",
+          "name": "parentUIDs",
           "type": "bytes32[]"
         }
       ],
@@ -152,6 +152,32 @@ export const contract = {
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "generateProductUID",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getApprovedManagerRequestsAddresses",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -167,24 +193,9 @@ export const contract = {
           "type": "address"
         },
         {
-          "internalType": "string",
+          "internalType": "bytes32",
           "name": "",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
+          "type": "bytes32"
         },
         {
           "internalType": "uint256",
@@ -212,7 +223,7 @@ export const contract = {
       "inputs": [
         {
           "internalType": "bytes32",
-          "name": "barcode",
+          "name": "uid",
           "type": "bytes32"
         }
       ],
@@ -345,24 +356,14 @@ export const contract = {
           "type": "uint256"
         },
         {
-          "internalType": "string",
-          "name": "name",
-          "type": "string"
+          "internalType": "bytes32",
+          "name": "ipfsRequestHash",
+          "type": "bytes32"
         },
         {
-          "internalType": "string",
-          "name": "email",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "company",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "purpose",
-          "type": "string"
+          "internalType": "bool",
+          "name": "approved",
+          "type": "bool"
         }
       ],
       "stateMutability": "view",
@@ -407,24 +408,9 @@ export const contract = {
     {
       "inputs": [
         {
-          "internalType": "string",
-          "name": "name",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "email",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "company",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "purpose",
-          "type": "string"
+          "internalType": "bytes32",
+          "name": "ipfsRequestHash",
+          "type": "bytes32"
         }
       ],
       "name": "submitManagerRequest",
@@ -455,18 +441,13 @@ export const contract = {
       "inputs": [
         {
           "internalType": "bytes32",
-          "name": "barcode",
+          "name": "uid",
           "type": "bytes32"
         },
         {
           "internalType": "bytes32",
           "name": "informationHash",
           "type": "bytes32"
-        },
-        {
-          "internalType": "uint256",
-          "name": "timestamp",
-          "type": "uint256"
         }
       ],
       "name": "updateProduct",

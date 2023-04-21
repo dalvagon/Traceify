@@ -1,3 +1,5 @@
+import { UtilService } from './util.service';
+import { IpfsService } from './ipfs.service';
 import { ContractsService } from 'src/app/data/service/contracts.service';
 import { Injectable } from '@angular/core';
 
@@ -6,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class AdminService {
 
-  constructor(private contractsService: ContractsService) { }
+  constructor(private contractsService: ContractsService, private ipfs: IpfsService, private util: UtilService) { }
 
   public async isAdmin() {
     return await this.contractsService.hasRole('DEFAULT_ADMIN_ROLE');
@@ -16,16 +18,14 @@ export class AdminService {
     const contract = await this.contractsService.getContractInstance();
 
     if (typeof contract !== 'undefined') {
-      const name = request.name;
-      const email = request.email;
-      const company = request.company;
-      const purpose = request.purpose;
+      const ipfsObj = await this.ipfs.uploadData(JSON.stringify(request));
+      const ipfsHash = this.util.getBytes32FromIpfsHash(ipfsObj.path);
 
-      return contract['submitManagerRequest'](name, email, company, purpose);
+      return contract['submitManagerRequest'](ipfsHash);
     }
   }
 
-  public async getManagerRequestAddresses() {
+  public async getPendingManagerRequestAddresses() {
     const contract = await this.contractsService.getContractInstance();
 
     if (typeof contract !== 'undefined') {
@@ -33,12 +33,36 @@ export class AdminService {
     }
   }
 
+  public async getApprovedManagerRequestAddresses() {
+    const contract = await this.contractsService.getContractInstance();
+
+    if (typeof contract !== 'undefined') {
+      return contract['getApprovedManagerRequestsAddresses']();
+    }
+  }
+
   public async getManagerRequest(address: string) {
     const contract = await this.contractsService.getContractInstance();
 
     if (typeof contract !== 'undefined') {
-      return contract['getManagerRequest'](address);
+      const requestArr = await contract['getManagerRequest'](address);
+      const requestHashBytes = requestArr[1];
+      const requestHash = this.util.getIpfsHashFromBytes32(requestHashBytes);
+      const request = await this.ipfs.downloadData(requestHash);
+
+      return {
+        address: requestArr[0],
+        ipfsHash: requestHash,
+        name: request.name,
+        email: request.email,
+        company: request.company,
+        role: request.role,
+        purpose: request.purpose,
+        timestamp: requestArr[2].toNumber() * 1000
+      }
     }
+
+    return null;
   }
 
   public async approveManagerRequest(address: string) {
@@ -56,5 +80,4 @@ export class AdminService {
       return contract['denyManagerRequest'](address);
     }
   }
-
 }

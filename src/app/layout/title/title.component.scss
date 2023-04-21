@@ -1,8 +1,10 @@
 @import "/src/scss/colors";
+@import "/src/scss/dimensions";
 
 .title {
     display: flex;
     flex-direction: row;
+    align-items: center;
 
     .tail {
         color: $secondary;
@@ -10,5 +12,21 @@
         font-size: 30px;
         letter-spacing: 10px;
         width: max-content;
+    }
+}
+
+@media screen and (max-width: $max-width) {
+    .title {
+        .tail {
+            font-size: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: $min-width) {
+    .title {
+        .tail {
+            font-size: 15px;
+        }
     }
 }

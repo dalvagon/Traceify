@@ -1,6 +1,7 @@
 @import "/src/scss/colors";
 @import "/src/scss/dimensions";
 @import "/src/scss/buttons";
+@import "/src/scss/miscellaneous";
 
 .container {
     width: 80%;
@@ -51,8 +52,6 @@
                     align-items: center;
 
                     .address {
-
-
                         &:hover {
                             cursor: pointer;
                             user-select: all !important;
@@ -65,6 +64,7 @@
                         color: $primary;
                         background-color: $secondary;
                         padding: 5px;
+                        width: max-content;
                     }
 
                     .timestamp {
@@ -96,7 +96,7 @@
             .approved-request {
                 margin-top: 20px;
                 border-top: 1px solid $secondary;
-                padding: 10px;
+                padding: 15px;
 
                 .header {
                     display: flex;
@@ -105,11 +105,19 @@
                     align-items: center;
 
                     .address {
+                        &:hover {
+                            cursor: pointer;
+                            user-select: all !important;
+                        }
+                    }
+
+                    .email {
                         font-size: 10px;
                         opacity: 0.7;
                         color: $primary;
                         background-color: $secondary;
                         padding: 5px;
+                        width: max-content;
                     }
 
                     .timestamp {
@@ -120,6 +128,14 @@
                 .purpose {
                     margin-top: 10px;
                     font-size: 15px;
+                }
+
+                .buttons {
+                    button {
+                        margin-top: 10px !important;
+                        margin-right: 10px !important;
+                        font-size: 10px !important;
+                    }
                 }
             }
         }

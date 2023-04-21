@@ -1,6 +1,9 @@
 <div class="container">
     <div class="left">
-        <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="form-disabled" *ngIf="formDisabled">
+            Please connect your wallet to request to become a manager.
+        </div>
+        <form class="form" [formGroup]="form" (ngSubmit)="submit()" *ngIf="!formDisabled">
             <div class="title">Become a manager</div>
             <label for="account">ACCOUNT</label>
             <input type="text" pInputText formControlName="account" class="input-text1" />
@@ -11,11 +14,8 @@
             <label for="name">NAME</label>
             <input type="text" pInputText formControlName="name" class="input-text1" />
             <small class="error"
-                *ngIf="(form.controls['name'].touched || submitted) && form.controls['name'].errors?.required">
+                *ngIf="(form.controls['name'].touched || submitted) && (form.controls['name'].errors?.required || form.controls['name'].errors?.emptyString)">
                 Name is required</small>
-            <small class="error"
-                *ngIf="(form.controls['name'].touched || submitted) && form.controls['name'].errors?.pattern">
-                Name should only contain letters</small>
 
             <label for="email">EMAIL</label>
             <input type="text" pInputText formControlName="email" class="input-text1" />
@@ -29,13 +29,19 @@
             <label for="company">COMPANY</label>
             <input type="text" pInputText formControlName="company" class="input-text1" />
             <small class="error"
-                *ngIf="(form.controls['company'].touched || submitted) && form.controls['company'].errors?.required">
+                *ngIf="(form.controls['company'].touched || submitted) && (form.controls['company'].errors?.required || form.controls['company'].errors?.emptyString)">
                 Company is required</small>
+
+            <label for="role">ROLE</label>
+            <input type="text" pInputText formControlName="role" class="input-text1" />
+            <small class="error"
+                *ngIf="(form.controls['role'].touched || submitted) && (form.controls['role'].errors?.required || form.controls['role'].errors?.emptyString)">
+                Role is required</small>
 
             <label for="purpose">PURPOSE</label>
             <textarea rows="3" cols="30" pInputTextarea formControlName="purpose" class="input-text1"></textarea>
             <small class="error"
-                *ngIf="(form.controls['purpose'].touched || submitted) && form.controls['purpose'].errors?.required">
+                *ngIf="(form.controls['purpose'].touched || submitted) && (form.controls['purpose'].errors?.required || form.controls['purpose'].errors?.emptyString)">
                 Purpose is required</small>
 
             <button type="submit" pButton label="Request" class="button-filled request-button"

@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/data/service/admin.service';
 
@@ -12,24 +13,36 @@ export class AdminComponent implements OnInit {
   showPedingRequests = true;
   showApprovedRequests = false;
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService, private messageService: MessageService) { }
 
-  async ngOnInit() {
-    const managerRequestAddresses = await this.adminService.getManagerRequestAddresses();
+  ngOnInit() {
+    this.getPendingRequests();
+    this.getApprovedRequests();
+  }
 
-    for (const address of managerRequestAddresses) {
-      const request = await this.adminService.getManagerRequest(address);
-      this.pendingRequests.push({
-        address: request[0],
-        name: request[1],
-        email: request[2],
-        company: request[3],
-        purpose: request[4],
-        timestamp: request[5].toNumber() * 1000
-      });
-    }
+  getPendingRequests() {
+    this.adminService.getPendingManagerRequestAddresses().then(async (addresses) => {
+      for (const address of addresses) {
+        const request = await this.adminService.getManagerRequest(address);
+        if (request !== null) {
+          this.pendingRequests.push(request);
+        }
+      }
 
-    this.pendingRequests.sort((a, b) => b.timestamp - a.timestamp);
+      this.pendingRequests.sort((a, b) => b.timestamp - a.timestamp);
+    });
+  }
+
+  getApprovedRequests() {
+    this.adminService.getApprovedManagerRequestAddresses().then(async (addresses) => {
+      for (const address of addresses) {
+        const request = await this.adminService.getManagerRequest(address);
+        if (request !== null) {
+          this.approvedRequests.push(request);
+        }
+      }
+      this.approvedRequests.sort((a, b) => b.timestamp - a.timestamp);
+    });
   }
 
   switchToPendingRequests() {
@@ -44,17 +57,18 @@ export class AdminComponent implements OnInit {
 
   approveRequest(address: any) {
     this.adminService.approveManagerRequest(address).then(() => {
-      window.location.reload();
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Request approved. The request may still appear in the inbox until the transaction is completed.' });
+      this.pendingRequests = this.pendingRequests.filter((request) => request.address !== address);
     }
     ).catch((error) => {
       console.log(error);
     });
-
   }
 
   rejectRequest(address: any) {
     this.adminService.denyManagerRequest(address).then(() => {
-      window.location.reload();
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'The request may still appear in the inbox until the transaction is completed.' });
+      this.pendingRequests = this.pendingRequests.filter((request) => request.address !== address);
     }
     ).catch((error) => {
       console.log(error);
@@ -108,6 +122,10 @@ export class AdminComponent implements OnInit {
     }
 
     const weeks = this.differenceInWeeks(timestamp);
-    return weeks + ' weeks ago';
+    if (weeks < 4) {
+      return weeks + ' weeks ago';
+    }
+
+    return new Date(timestamp).toLocaleDateString();
   }
 }

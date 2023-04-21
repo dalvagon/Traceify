@@ -1,7 +1,8 @@
 @import "/src/scss/colors";
 
 ::ng-deep * {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Inconsolata',
+        monospace;
     letter-spacing: 1px;
     margin: 0;
     padding: 0;

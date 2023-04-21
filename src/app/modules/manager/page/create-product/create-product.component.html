@@ -1,5 +1,12 @@
 <div class="container">
-    <div class="form" formControlName="form">
-        <input type="text" pInputText formControlName="barcode" />
+    <div class="title">Create and manage your product</div>
+    <div class="content">
+        <div class="left">
+            <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+                <label for="uid">UID</label>
+                <input type="text" pInputText formControlName="uid" class="input-text1" />
+            </form>
+        </div>
+        <div class="right"></div>
     </div>
 </div>

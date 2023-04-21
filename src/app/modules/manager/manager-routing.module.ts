@@ -1,4 +1,3 @@
-import { RequestComponent } from '../dapp/page/request/request.component';
 import { ManagerComponent } from './page/manager/manager.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';

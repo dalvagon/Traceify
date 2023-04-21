@@ -13,6 +13,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   connectWalletButtonVisible = true;
   accountSubscription: any;
   account: any;
+  isAdmin = false;
+  isManager = false;
 
   constructor(
     private walletService: WalletService,
@@ -48,6 +50,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
             if (isManager && this.router.url === '/request') {
               this.router.navigate(['/manager']);
+            }
+
+            if (isAdmin && this.router.url.includes('/manager')) {
+              this.router.navigate(['/admin']);
+            }
+
+            if (isManager && this.router.url.includes('/admin')) {
+              this.router.navigate(['/manager']);
+            }
+
+            if (isAdmin) {
+              this.isAdmin = true;
+            }
+
+            if (isManager) {
+              this.isManager = true;
             }
           }
 

@@ -56,18 +56,18 @@ export class LandingComponent implements OnInit {
 
     const canvas = this.canvasRef.nativeElement;
     const ctx = canvas.getContext('2d');
-    const margin = 20;
-    const width = canvas.width - margin * 2;
-    const height = canvas.height - margin * 2 - 15;
+    const width = canvas.width;
+    const height = canvas.height;
     const xoff = 10;
 
     if (ctx) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#001A28';
-      for (let x = margin; x <= width; x += xoff) {
+      ctx.fillStyle = '#E1FF17';
+      ctx.strokeStyle = '#E1FF17';
+      for (let x = 0; x <= width; x += xoff) {
         const digit = Math.floor(Math.random() * 10);
-        const y = x == margin || x == xoff + margin || x + xoff >= width ? height + Math.floor(Math.random() * 10) : height - 15;
-        const lineWidth = (Math.floor(Math.random() * xoff * 0.5)) ^ 2 + 2;
+        const y = x == 0 || x == xoff || x + xoff >= width ? 2 * height / 3 + Math.floor(Math.random() * 10) : 3 * height / 5;
+        const lineWidth = Math.pow(Math.random(), 2) * xoff * 0.5 + 1;
 
         ctx.beginPath();
         ctx.font = "10px bold Rubik";

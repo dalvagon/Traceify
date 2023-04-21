@@ -33,7 +33,19 @@ export class IpfsService {
     return this.client.add(data);
   }
 
-  downloadData(cid: string) {
-    return this.client.cat(cid);
+  async downloadData(cid: string) {
+    const resp = this.client.cat(cid);
+
+    let data = [];
+    for await (const chunk of resp) {
+      data.push(chunk);
+    }
+    const buffer = Buffer.from(Buffer.concat(data)).toString('utf8');
+
+    return JSON.parse(buffer);
+  }
+
+  async removeData(cid: string) {
+    return this.client.pin.rm(cid);
   }
 }

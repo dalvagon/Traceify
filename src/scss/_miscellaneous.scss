@@ -1,0 +1,8 @@
+@import "/src/scss/colors";
+
+.note {
+    width: 100%;
+    color: $primary;
+    background-color: $secondary;
+    padding: 10px;
+}
