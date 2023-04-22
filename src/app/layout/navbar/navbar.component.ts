@@ -33,39 +33,29 @@ export class NavbarComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     if (this.walletService.canMakeCalls()) {
-      this.walletService.connectWallet();
-
       this.accountSubscription = this.walletService.accountChange$.subscribe(
         async (account: any) => {
           if (account !== null) {
-            const isAdmin = await this.adminService.isAdmin();
-            const isManager = await this.managerService.isManager();
-            if (!isAdmin && !isManager && (this.router.url.includes('/manager') || this.router.url.includes('/admin'))) {
+            this.isAdmin = await this.adminService.isAdmin();
+            this.isManager = await this.managerService.isManager();
+            if (!this.isAdmin && !this.isManager && (this.router.url.includes('/manager') || this.router.url.includes('/admin'))) {
               this.router.navigate(['/']);
             }
 
-            if (isAdmin && this.router.url === '/request') {
+            if (this.isAdmin && this.router.url === '/request') {
               this.router.navigate(['/admin']);
             }
 
-            if (isManager && this.router.url === '/request') {
+            if (this.isManager && this.router.url === '/request') {
               this.router.navigate(['/manager']);
             }
 
-            if (isAdmin && this.router.url.includes('/manager')) {
+            if (this.isAdmin && this.router.url.includes('/manager')) {
               this.router.navigate(['/admin']);
             }
 
-            if (isManager && this.router.url.includes('/admin')) {
+            if (this.isManager && this.router.url.includes('/admin')) {
               this.router.navigate(['/manager']);
-            }
-
-            if (isAdmin) {
-              this.isAdmin = true;
-            }
-
-            if (isManager) {
-              this.isManager = true;
             }
           }
 

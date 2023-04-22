@@ -1,17 +1,18 @@
 @import "/src/scss/colors";
 
 ::ng-deep * {
-    font-family: 'Inconsolata',
-        monospace;
-    letter-spacing: 1px;
-    margin: 0;
-    padding: 0;
-    user-select: none;
-    font-weight: bolder;
+  font-family: 'Inconsolata',
+    monospace;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  font-weight: bolder;
+  text-transform: uppercase !important;
 }
 
 ::ng-deep html,
 body {
-    height: 100%;
-    height: 100vh;
+  height: 100%;
+  height: 100vh;
 }

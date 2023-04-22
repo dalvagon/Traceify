@@ -1,0 +1,98 @@
+@import "/src/scss/colors";
+@import "/src/scss/buttons";
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .title {
+      font-size: 30px;
+      color: $secondary;
+    }
+
+    button {
+      margin-left: auto;
+    }
+  }
+
+  :host ::ng-deep {
+    .table.p-datatable {
+      color: $secondary !important;
+
+      .p-datatable-wrapper {
+
+        &::-webkit-scrollbar {
+          height: 10px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: $secondary;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: $primary;
+        }
+      }
+
+      .p-datatable-thead {
+        th {
+          background-color: $secondary !important;
+          color: $primary !important;
+          border: none !important;
+        }
+
+        th.p-sortable-column:focus {
+          box-shadow: none !important;
+          border: none !important;
+          outline: 1px solid $primary !important;
+        }
+      }
+
+      .p-datatable-tbody {
+        tr {
+          td {
+            background-color: $primary !important;
+            color: $secondary !important;
+            border: none !important;
+
+            .expanded {
+              border-bottom: 1px solid $secondary !important;
+
+              .uid {
+                font-size: 10px;
+                user-select: all !important;
+              }
+
+              .description {
+                padding: 20px;
+              }
+            }
+          }
+        }
+      }
+
+      .p-paginator {
+        background-color: $secondary !important;
+        color: $primary !important;
+        border: none !important;
+
+        .p-paginator-page,
+        .p-paginator-current,
+        .p-paginator-first,
+        .p-paginator-last,
+        .p-paginator-prev,
+        .p-paginator-next {
+          background-color: $secondary !important;
+          color: $primary !important;
+        }
+      }
+    }
+  }
+}

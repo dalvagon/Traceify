@@ -132,8 +132,8 @@
 
                     svg,
                     img {
-                        max-height: 50px;
-                        min-height: 40px;
+                        max-height: 50px !important;
+                        min-height: 40px !important;
                     }
 
                     &:hover {

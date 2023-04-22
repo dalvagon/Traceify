@@ -31,7 +31,6 @@ export class RequestComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.walletService.canMakeCalls()) {
-      this.walletService.connectWallet();
 
       this.accountSubscription = this.walletService.accountChange$.subscribe(
         async (account: any) => {
@@ -83,7 +82,7 @@ export class RequestComponent implements OnInit {
       }
       ).catch((error: any) => {
         console.log(error);
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error while requesting manager role. If you already requested, please wait for the approval.' })
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Encountered an error while requesting manager role. If you already requested, please wait for the approval.' })
         this.loading = false;
       });
     }

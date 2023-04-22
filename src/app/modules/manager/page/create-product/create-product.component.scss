@@ -4,97 +4,140 @@
 @import 'src/scss/buttons';
 
 .container {
-    width: 80%;
-    color: $secondary;
-    margin: 0 auto;
+  width: 80%;
+  color: $secondary;
+  margin: 0 auto;
+  margin-top: 20px;
 
-    .title {
-        font-size: 35px;
-    }
+  .title {
+    font-size: 35px;
+  }
 
-    .content {
-        display: flex;
-        flex-direction: row;
+  .subtitle {
+    font-size: 15px;
+    margin-top: 10px;
+  }
 
-        .left {
-            flex-grow: 1;
-            padding: 30px;
-            border-right: 1px solid $secondary;
+  .content {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
 
-            .form {
-                margin: auto;
-                height: max-content;
+    .left {
+      flex-grow: 1;
+      padding: 30px;
+      border-right: 1px solid $secondary;
 
-                label {
-                    display: block !important;
-                    margin-top: 15px !important;
-                    margin-bottom: 2px !important;
-                    font-size: 12px !important;
-                    letter-spacing: 5px;
-                }
+      .form {
+        margin: auto;
+        height: max-content;
 
-                .request-button {
-                    display: block;
-                    margin: 0 auto !important;
-                    margin-top: 10px !important;
-                }
-
-                .error {
-                    color: $error;
-                }
-
-                .note {
-                    display: block;
-                    margin-top: 10px !important;
-                }
-            }
+        label {
+          margin-bottom: 5px !important;
+          font-size: 15px !important;
+          margin-top: 15px !important;
+          letter-spacing: 5px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
         }
 
-        .right {
-            width: 30%;
-            background-color: $primary;
-            padding: 20px;
-            color: $secondary;
+        .dates {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
 
-            .title {
-                font-size: 25px;
-                padding: 10px;
-                margin-top: 10px;
-
-                i {
-                    font-size: 20px;
-                    margin-left: 5px;
-                    margin-right: 5px;
-                }
-            }
-
-            .text {
-                font-size: 15px;
-                padding-left: 10px;
-            }
+          .date {
+            width: 48%;
+          }
         }
+
+        .derived {
+          .derived-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0.7;
+
+            .derived-item-text {
+              font-size: 15px;
+            }
+
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+
+        .uid,
+        .parent-uid {
+          font-size: 10px;
+        }
+
+        .request-button {
+          display: block;
+          margin: 0 auto !important;
+          margin-top: 10px !important;
+        }
+
+        .error {
+          color: $error;
+        }
+
+        .note {
+          display: block;
+          margin-top: 10px !important;
+        }
+      }
     }
+
+    .right {
+      width: 30%;
+      background-color: $primary;
+      padding: 20px;
+      color: $secondary;
+
+      .title {
+        font-size: 25px;
+        padding: 10px;
+        margin-top: 10px;
+
+        i {
+          font-size: 20px;
+          margin-left: 5px;
+          margin-right: 5px;
+        }
+      }
+
+      .text {
+        font-size: 15px;
+        padding-left: 10px;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: $max-width) {
-    content {
+  .container {
 
-        .container {
-            width: 80%;
-            display: flex;
-            flex-direction: column;
-        }
+    .content {
+      display: flex;
+      flex-direction: column;
 
-        .left,
-        .right {
-            border: none !important;
-            width: 100% !important;
-        }
+      .left,
+      .right {
+        width: 100% !important;
+      }
 
-        .left {
-            .form {
-                width: 70% !important;
-            }
+      .left {
+        border-right: none !important;
+
+        .form {
+          width: 80% !important;
+          margin: 0 auto !important;
         }
+      }
     }
+  }
 }

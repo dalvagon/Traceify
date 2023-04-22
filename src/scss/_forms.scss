@@ -1,34 +1,74 @@
+@import "/src/scss/buttons";
+
 %input-text {
-    outline: none;
-    width: 100%;
-    box-shadow: none !important;
-    border: none;
-    border-radius: 0%;
+  outline: none !important;
+  width: 100% !important;
+  box-shadow: none !important;
+  border-radius: 0% !important;
+  height: 48px;
 
-    &:hover {
-        @extend %input-text;
-    }
+  &:hover {
+    @extend %input-text;
+  }
 
-    &:not(:focus) {
-        @extend %input-text;
-    }
+  &:not(:focus) {
+    @extend %input-text;
+  }
 
-    &::-webkit-scrollbar {
-        width: 10px;
-    }
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
 
-    &::-webkit-scrollbar-track {
-        background: $primary;
-    }
+  &::-webkit-scrollbar-track {
+    background: $primary;
+  }
 
-    &::-webkit-scrollbar-thumb {
-        background: $secondary;
-    }
+  &::-webkit-scrollbar-thumb {
+    background: $secondary;
+  }
+}
+
+.input-textarea {
+  @extend %input-text;
+  min-height: 96px !important;
+  resize: vertical !important;
+  background-color: $primary !important;
+  border: 1px solid $secondary !important;
+  color: $secondary !important;
 }
 
 .input-text1 {
-    @extend %input-text;
-    background-color: $primary !important;
-    border: 1px solid $secondary !important;
-    color: $secondary !important;
+  @extend %input-text;
+  background-color: $primary !important;
+  border: 1px solid $secondary !important;
+  color: $secondary !important;
+}
+
+:host ::ng-deep {
+  .calendar.p-calendar {
+    width: 100% !important;
+
+    .p-inputtext {
+      @extend .input-text1;
+      border-right: none !important;
+    }
+
+    .p-button-icon-only {
+      @extend %button;
+      background-color: $primary !important;
+      color: $secondary !important;
+      border: 1px solid $secondary !important;
+      border-left: none !important;
+    }
+
+    .p-datepicker,
+    .p-monthpicker,
+    .p-yearpicker,
+    .p-datepicker-header {
+      border-radius: 0% !important;
+      background-color: $secondary !important;
+      color: $primary !important;
+      text-transform: uppercase !important;
+    }
+  }
 }

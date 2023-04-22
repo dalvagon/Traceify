@@ -1,1 +1,43 @@
-<p>manager works!</p>
+<div class="container">
+  <div class="header">
+    <div class="title">Your products</div>
+    <button type="button" pButton label="Create a new product" class="button-outline"
+      [routerLink]="'/manager/create-product'"></button>
+  </div>
+  <p-table [columns]="cols" [value]="products" dataKey="uid" [paginator]="true" [rows]="10"
+    [showCurrentPageReport]="true" [tableStyle]="{ 'min-width': '50rem' }" styleClass="table">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 5rem"></th>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{ col.header }} <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-columns="columns" let-expanded="expanded">
+      <tr>
+        <td>
+          <button type="button" pButton [pRowToggler]="product" class="button-filled"
+            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        </td>
+        <td *ngFor="let col of columns">
+          {{ product[col.field] }}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-product>
+      <tr>
+        <td colspan="6">
+          <div class="expanded">
+            <div class="uid">
+              {{ product.uid }}
+            </div>
+            <div class="description">
+              {{ product.description }}
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

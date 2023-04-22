@@ -1,5 +1,5 @@
 export const contract = {
-  address: '0xE2bB677E3FcEa2D042AfC7D5f29c9b3557FDFA33',
+  address: '0x0c893840683a6EF9168B142964C7914F32d950aB',
   abi: [
     {
       "anonymous": false,
@@ -172,6 +172,19 @@ export const contract = {
           "internalType": "address[]",
           "name": "",
           "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getManagerProducts",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
         }
       ],
       "stateMutability": "view",
@@ -435,6 +448,24 @@ export const contract = {
         }
       ],
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "uid",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "newManager",
+          "type": "address"
+        }
+      ],
+      "name": "transferProductOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {

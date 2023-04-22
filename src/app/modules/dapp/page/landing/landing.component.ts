@@ -62,8 +62,8 @@ export class LandingComponent implements OnInit {
 
     if (ctx) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#E1FF17';
-      ctx.strokeStyle = '#E1FF17';
+      ctx.fillStyle = '#ff147d';
+      ctx.strokeStyle = '#ff147d';
       for (let x = 0; x <= width; x += xoff) {
         const digit = Math.floor(Math.random() * 10);
         const y = x == 0 || x == xoff || x + xoff >= width ? 2 * height / 3 + Math.floor(Math.random() * 10) : 3 * height / 5;

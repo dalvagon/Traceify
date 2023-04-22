@@ -2,60 +2,59 @@
 @import "/src/scss/dimensions";
 
 %button {
-    outline: none;
-    width: auto;
-    box-shadow: none;
-    border: none;
-    border-radius: 0%;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 0% !important;
 
-    &:hover {
-        @extend %button;
-    }
+  &:hover {
+    @extend %button;
+  }
 
-    &:not(:focus) {
-        @extend %button;
-    }
+  &:not(:focus) {
+    @extend %button;
+  }
 }
 
 .button-filled {
-    @extend %button;
-    background-color: $secondary !important;
-    color: $primary !important;
-    border: 1px solid $secondary !important;
+  @extend %button;
+  background-color: $secondary !important;
+  color: $primary !important;
+  border: 1px solid $secondary !important;
 }
 
 .button-outline {
-    @extend %button;
-    background-color: $primary !important;
-    color: $secondary !important;
-    border: 1px solid $secondary !important;
+  @extend %button;
+  background-color: $primary !important;
+  color: $secondary !important;
+  border: 1px solid $secondary !important;
 }
 
 .button-filled-reversed {
-    @extend %button;
-    background-color: $primary !important;
-    color: $secondary !important;
+  @extend %button;
+  background-color: $primary !important;
+  color: $secondary !important;
 }
 
 .button-outline-reversed {
-    @extend %button;
-    background-color: $secondary !important;
-    color: $primary !important;
+  @extend %button;
+  background-color: $secondary !important;
+  color: $primary !important;
 }
 
 @media screen and (max-width: $max-width) {
-    %button {
-        font-size: 10px;
-    }
+  %button {
+    font-size: 10px;
+  }
 }
 
 .link {
-    font-size: 15px;
-    margin-top: 10px;
-    color: $primary;
+  font-size: 15px;
+  margin-top: 10px;
+  color: $primary;
 
-    &:hover {
-        cursor: pointer;
-        text-decoration: underline;
-    }
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 }
