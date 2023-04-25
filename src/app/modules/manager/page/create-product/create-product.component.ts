@@ -1,6 +1,6 @@
 import { MessageService } from 'primeng/api';
 import { ManagerService } from 'src/app/data/service/manager.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,9 @@ import { FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } f
   styleUrls: ['./create-product.component.scss']
 })
 export class CreateProductComponent implements OnInit {
+  @ViewChild("qr")
+  qr: any;
+
   form = this.fb.group({
     uid: new FormControl({ value: '', disabled: true }, { validators: [Validators.required], updateOn: 'change' }),
     name: new FormControl('', [Validators.required, this.emptyStringValidator]),
@@ -92,6 +95,17 @@ export class CreateProductComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: "Encountered an error while creating the product. Please try again." });
       });
     }
+  }
+
+  saveQr() {
+    const dataUrl = this.qr.context.canvas.toDataURL("image/png", 1.0);
+    const filename = this.form.controls['uid'].value + '.png';
+
+    var a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
   }
 
   manufacturingDateSelected() {

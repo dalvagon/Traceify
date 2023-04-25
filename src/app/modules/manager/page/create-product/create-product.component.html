@@ -72,11 +72,11 @@
 
         <p-dialog header="Confirm" [(visible)]="confirmDialogVisible" [modal]="true" [style]="{ width: '40vw' }"
           [draggable]="false" [resizable]="false" styleClass="dialog">
-          <p class="text">The following qr code was generated for your product. Make sure to save it before moving on.
+          <p class="text">The following qr code was generated for your product. Make sure to save it by clicking on it.
           </p>
-          <qrcode *ngIf="!form.controls['uid'].errors?.required" [qrdata]="form.controls['uid'].value!"
+          <qrcode #qr *ngIf="!form.controls['uid'].errors?.required" [qrdata]="form.controls['uid'].value!"
             [errorCorrectionLevel]="'M'" [allowEmptyString]="true" [width]="100" colorDark="#1D1927"
-            colorLight="#FFF3FA">
+            colorLight="#FFF3FA" (click)="saveQr()" class="qrcode">
           </qrcode>
           <button type="button" pButton label="Confirm" class="button-outline" (click)="confirm()"
             [loading]="loading"></button>

@@ -90,7 +90,11 @@
           margin-top: 10px !important;
         }
 
-
+        .qrcode {
+          &:hover {
+            cursor: pointer;
+          }
+        }
       }
     }
 
