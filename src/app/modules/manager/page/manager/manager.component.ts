@@ -32,6 +32,7 @@ export class ManagerComponent implements OnInit {
           if (account !== null) {
             this.ngZone.run(() => {
               this.account = account;
+              this.products = [];
               this.getProductUids().then(async (uids: any) => {
                 for (const uid of uids) {
                   const product = await this.getProduct(uid);

@@ -1,6 +1,7 @@
 import { MessageService } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/data/service/admin.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-admin',
@@ -13,9 +14,10 @@ export class AdminComponent implements OnInit {
   showPedingRequests = true;
   showApprovedRequests = false;
 
-  constructor(private adminService: AdminService, private messageService: MessageService) { }
+  constructor(private adminService: AdminService, private messageService: MessageService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.getPendingRequests();
     this.getApprovedRequests();
   }
@@ -42,6 +44,7 @@ export class AdminComponent implements OnInit {
         }
       }
       this.approvedRequests.sort((a, b) => b.timestamp - a.timestamp);
+      this.spinner.hide();
     });
   }
 

@@ -11,6 +11,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
 import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
 import { AddOperationComponent } from './page/add-operation/add-operation.component';
 import { QRCodeModule } from 'angularx-qrcode';
 
@@ -27,6 +28,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     TooltipModule,
     CalendarModule,
     TableModule,
+    DialogModule,
     QRCodeModule,
     NgxSpinnerModule
   ]

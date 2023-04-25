@@ -45,12 +45,12 @@ export class ManagerService {
         name: ipfsObj.name,
         category: ipfsObj.category,
         manufacturer: ipfsObj.manufacturer,
-        manufacturingDate: new Date(ipfsObj.manufacturingDate).toLocaleString(),
-        expiryDate: new Date(ipfsObj.expiryDate).toLocaleString(),
+        manufacturingDate: new Date(ipfsObj.manufacturingDate).toDateString(),
+        expiryDate: new Date(ipfsObj.expiryDate).toDateString(),
         description: ipfsObj.description,
         parents: product[1],
         operations: product[2],
-        timestamp: new Date(product[3] * 1000).toLocaleString()
+        timestamp: new Date(product[3] * 1000).toDateString()
       }
     }
 

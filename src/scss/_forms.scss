@@ -78,4 +78,21 @@
       text-transform: uppercase !important;
     }
   }
+
+  .dialog.p-dialog {
+    border-radius: 0 !important;
+
+    .p-dialog-header {
+      background-color: $secondary !important;
+      color: $primary !important;
+      border-radius: 0 !important;
+    }
+
+    .p-dialog-content {
+      background-color: $secondary !important;
+      color: $primary !important;
+      border-radius: 0 !important;
+      text-align: center;
+    }
+  }
 }

@@ -24,6 +24,7 @@ export class CreateProductComponent implements OnInit {
   submitted = false;
   loading = false;
   expiryMinDate: Date = new Date();
+  confirmDialogVisible = false;
 
   constructor(private fb: FormBuilder, private managerService: ManagerService, private messageService: MessageService) { }
 
@@ -58,6 +59,12 @@ export class CreateProductComponent implements OnInit {
   submit() {
     this.submitted = true;
     if (this.form.valid) {
+      this.confirmDialogVisible = true;
+    }
+  }
+
+  confirm() {
+    if (this.form.valid) {
       const uid = this.form.controls['uid'].value;
       const product = {
         name: this.form.controls['name'].value,
@@ -74,6 +81,7 @@ export class CreateProductComponent implements OnInit {
         this.form.reset();
         this.parentUids = [];
         this.parents = [];
+        this.confirmDialogVisible = false;
         this.managerService.generateUid().then((uid: string) => {
           this.form.controls['uid'].setValue(uid);
         });

@@ -29,13 +29,12 @@ export class ProductComponent implements OnInit {
       this.product = await this.productService.getProduct(this.uid);
 
       if (this.product !== null) {
-        {
-          this.events = await this.buildEvents();
-          await this.getProductParents();
-          this.dataLoaded = true;
-          this.spinner.hide();
-        }
+        this.events = await this.buildEvents();
+        await this.getProductParents();
       }
+
+      this.dataLoaded = true;
+      this.spinner.hide();
     });
   }
 

@@ -26,12 +26,12 @@ export class ProductService {
         name: ipfsObj.name,
         category: ipfsObj.category,
         manufacturer: ipfsObj.manufacturer,
-        manufacturingDate: new Date(ipfsObj.manufacturingDate).toLocaleDateString(),
-        expiryDate: new Date(ipfsObj.expiryDate).toLocaleDateString(),
+        manufacturingDate: new Date(ipfsObj.manufacturingDate).toDateString(),
+        expiryDate: new Date(ipfsObj.expiryDate).toDateString(),
         description: ipfsObj.description,
         parents: product[1],
         operations: product[2],
-        timestamp: new Date(product[3] * 1000).toLocaleDateString()
+        timestamp: new Date(product[3] * 1000).toDateString()
       }
     }
 

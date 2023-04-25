@@ -1,5 +1,5 @@
 export const contract = {
-  address: '0x6A3cF1Ba1B8B44fd0715aa930de0058dE0198862',
+  address: '0xf5c04C16db86C9981dA4af236Cb15515D96B3c23',
   abi: [
     {
       "anonymous": false,
