@@ -1,73 +1,72 @@
 <div class="container">
-    <div class="left">
-        <div class="form-disabled" *ngIf="formDisabled">
-            Please connect your wallet to request to become a manager.
-        </div>
-        <form class="form" [formGroup]="form" (ngSubmit)="submit()" *ngIf="!formDisabled">
-            <div class="title">Become a manager</div>
-            <label for="account">ACCOUNT</label>
-            <input type="text" pInputText formControlName="account" class="input-text1" />
-            <small class="error"
-                *ngIf="(form.controls['account'].touched || submitted) && form.controls['account'].errors?.required">
-                Account is required</small>
-
-            <label for="name">NAME</label>
-            <input type="text" pInputText formControlName="name" class="input-text1" />
-            <small class="error"
-                *ngIf="(form.controls['name'].touched || submitted) && (form.controls['name'].errors?.required || form.controls['name'].errors?.emptyString)">
-                Name is required</small>
-
-            <label for="email">EMAIL</label>
-            <input type="text" pInputText formControlName="email" class="input-text1" />
-            <small class="error"
-                *ngIf="(form.controls['email'].touched || submitted) && form.controls['email'].errors?.required">
-                Email is required</small>
-            <small class="error"
-                *ngIf="(form.controls['email'].touched || submitted) && form.controls['email'].errors?.email">
-                Email format is not respected</small>
-
-            <label for="company">COMPANY</label>
-            <input type="text" pInputText formControlName="company" class="input-text1" />
-            <small class="error"
-                *ngIf="(form.controls['company'].touched || submitted) && (form.controls['company'].errors?.required || form.controls['company'].errors?.emptyString)">
-                Company is required</small>
-
-            <label for="role">ROLE</label>
-            <input type="text" pInputText formControlName="role" class="input-text1" />
-            <small class="error"
-                *ngIf="(form.controls['role'].touched || submitted) && (form.controls['role'].errors?.required || form.controls['role'].errors?.emptyString)">
-                Role is required</small>
-
-            <label for="purpose">PURPOSE</label>
-            <textarea rows="3" cols="30" pInputTextarea formControlName="purpose" class="input-text1"></textarea>
-            <small class="error"
-                *ngIf="(form.controls['purpose'].touched || submitted) && (form.controls['purpose'].errors?.required || form.controls['purpose'].errors?.emptyString)">
-                Purpose is required</small>
-
-            <button type="submit" pButton label="Request" class="button-filled request-button"
-                [loading]="loading"></button>
-            <small class="note">*Heads up: There is a small fee associated with becoming a manager on our secure
-                blockchain-based dapp.</small>
-        </form>
+  <div class="left">
+    <div class="form-disabled" *ngIf="formDisabled">
+      Please connect your wallet to request to become a manager.
     </div>
-    <div class="right">
-        <div class="title"><i class="pi pi-shield"></i>Be the guardian of trust</div>
-        <div class="text">
-            Join us as a manager and ensure product traceability on a secure blockchain-based dapp.
-            Take the first step towards becoming a leader in product traceability and join us today as we work towards
-            creating a more transparent and trustworthy product experience for everyone.
-        </div>
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()" *ngIf="!formDisabled">
+      <div class="title">Become a manager</div>
+      <label for="account">ACCOUNT</label>
+      <input type="text" pInputText formControlName="account" class="input-text1" />
+      <small class="error"
+        *ngIf="(form.controls['account'].touched || submitted) && form.controls['account'].errors?.required">
+        Account is required</small>
 
-        <div class="title"><i class="pi pi-lock"></i>Secure the journey</div>
-        <div class="text">
-            Become a manager and help us maintain the integrity of products from creation to consumption on a trusted
-            and decentralized dapp.
-        </div>
+      <label for="name">NAME</label>
+      <input type="text" pInputText formControlName="name" class="input-text1" />
+      <small class="error"
+        *ngIf="(form.controls['name'].touched || submitted) && (form.controls['name'].errors?.required || form.controls['name'].errors?.emptyString)">
+        Name is required</small>
 
-        <div class="title"><i class="pi pi-qrcode"></i>Scan and trust</div>
-        <div class="text">
-            Lead the way in product transparency by providing your customers with complete product history through
-            barcode scanning, building trust and loyalty.
-        </div>
+      <label for="email">EMAIL</label>
+      <input type="text" pInputText formControlName="email" class="input-text1" />
+      <small class="error"
+        *ngIf="(form.controls['email'].touched || submitted) && form.controls['email'].errors?.required">
+        Email is required</small>
+      <small class="error"
+        *ngIf="(form.controls['email'].touched || submitted) && form.controls['email'].errors?.email">
+        Email format is not respected</small>
+
+      <label for="company">COMPANY</label>
+      <input type="text" pInputText formControlName="company" class="input-text1" />
+      <small class="error"
+        *ngIf="(form.controls['company'].touched || submitted) && (form.controls['company'].errors?.required || form.controls['company'].errors?.emptyString)">
+        Company is required</small>
+
+      <label for="role">ROLE</label>
+      <input type="text" pInputText formControlName="role" class="input-text1" />
+      <small class="error"
+        *ngIf="(form.controls['role'].touched || submitted) && (form.controls['role'].errors?.required || form.controls['role'].errors?.emptyString)">
+        Role is required</small>
+
+      <label for="purpose">PURPOSE</label>
+      <textarea rows="3" cols="30" pInputTextarea formControlName="purpose" class="input-textarea"></textarea>
+      <small class="error"
+        *ngIf="(form.controls['purpose'].touched || submitted) && (form.controls['purpose'].errors?.required || form.controls['purpose'].errors?.emptyString)">
+        Purpose is required</small>
+
+      <button type="submit" pButton label="Request" class="button-filled request-button" [loading]="loading"></button>
+      <small class="note">*Heads up: There is a small fee associated with becoming a manager on our secure
+        blockchain-based dapp.</small>
+    </form>
+  </div>
+  <div class="right">
+    <div class="title"><i class="pi pi-shield"></i>Be the guardian of trust</div>
+    <div class="text">
+      Join us as a manager and ensure product traceability on a secure blockchain-based dapp.
+      Take the first step towards becoming a leader in product traceability and join us today as we work towards
+      creating a more transparent and trustworthy product experience for everyone.
     </div>
+
+    <div class="title"><i class="pi pi-lock"></i>Secure the journey</div>
+    <div class="text">
+      Become a manager and help us maintain the integrity of products from creation to consumption on a trusted
+      and decentralized dapp.
+    </div>
+
+    <div class="title"><i class="pi pi-qrcode"></i>Scan and trust</div>
+    <div class="text">
+      Lead the way in product transparency by providing your customers with complete product history through
+      barcode scanning, building trust and loyalty.
+    </div>
+  </div>
 </div>

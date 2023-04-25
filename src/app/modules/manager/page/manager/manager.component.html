@@ -30,10 +30,22 @@
         <td colspan="6">
           <div class="expanded">
             <div class="uid">
-              {{ product.uid }}
+              {{ product.uid }} <i class="pi pi-external-link" [routerLink]="['/product', product.uid]"></i>
             </div>
             <div class="description">
               {{ product.description }}
+            </div>
+            <div class="parents" *ngIf="product.parents.length > 0">
+              <div class="title">This product is derived from:</div>
+              <div class="list">
+                <div class="item" *ngFor="let parent of product.parents">
+                  {{ parent }} <i class="pi pi-external-link" [routerLink]="['/product', parent]"></i>
+                </div>
+              </div>
+            </div>
+            <div class="operations">
+              <button type="button" pButton label="Add operation" class="button-outline add-operation-button"
+                [routerLink]="['/manager/add-operation', product.uid]"></button>
             </div>
           </div>
         </td>

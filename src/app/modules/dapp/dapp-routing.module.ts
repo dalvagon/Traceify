@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RequestComponent } from './page/request/request.component';
 import { UserGuard } from 'src/app/core/guard/user.guard';
+import { ProductsComponent } from './page/products/products.component';
 
 const routes: Routes = [
   {
@@ -11,7 +12,11 @@ const routes: Routes = [
     component: LandingComponent,
   },
   {
-    path: 'product',
+    path: 'products',
+    component: ProductsComponent,
+  },
+  {
+    path: 'product/:uid',
     component: ProductComponent
   },
   {

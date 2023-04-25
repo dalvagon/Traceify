@@ -10,9 +10,10 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
 import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
+import { AddOperationComponent } from './page/add-operation/add-operation.component';
 
 @NgModule({
-  declarations: [CreateProductComponent, ManagerComponent],
+  declarations: [CreateProductComponent, ManagerComponent, AddOperationComponent],
   imports: [
     CommonModule,
     ManagerRoutingModule,

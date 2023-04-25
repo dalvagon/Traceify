@@ -1,1 +1,47 @@
-<p>product works!</p>
+<div class="container">
+  <div class="null-product" *ngIf="product === null">Product with this uid does not exist.</div>
+  <p-card *ngIf="product" [header]="product.name" [subheader]="product.timestamp" styleClass="product">
+    <div *ngIf="showProductDescription" class="content">
+      <div class="description">
+        {{ product.description }}
+      </div>
+      <div class="categoty">
+        Product category: {{ product.category }}
+      </div>
+      <div class="manufacturer">
+        Manufacturer: {{ product.manufacturer }}
+      </div>
+      <div class="manufacturingDate">
+        Manufacturing date: {{ product.manufacturingDate }}
+      </div>
+      <div class="expiryDate">
+        Expiry date: {{ product.expiryDate }}
+      </div>
+      <div class="parents" *ngIf="productParents.length > 0">
+        This product is derived from:
+        <div class="parent" *ngFor="let parent of productParents">
+          {{ parent.name }} <i class="pi pi-external-link" [routerLink]="['/product', parent.uid]"></i>
+        </div>
+      </div>
+      <div></div>
+    </div>
+    <button pButton [label]="showProductDescription ? 'Read less' : 'Read more'" class="button-outline-reversed"
+      (click)="toggleProductDescription()"></button>
+  </p-card>
+  <p-timeline [value]="events" align="alternate" styleClass="timeline">
+    <ng-template pTemplate="marker" let-event>
+      <span>
+        <i [ngClass]="event.icon"></i>
+      </span>
+    </ng-template>
+    <ng-template pTemplate="content" let-event>
+      <p-card [header]="event.title" [subheader]="event.date">
+        <p *ngIf="event.showDescription" class="description">
+          {{ event.description }}
+        </p>
+        <button pButton [label]="event.showDescription ? 'Read less' : 'Read more'" class="button-outline-reversed"
+          (click)="toggleDescription(event)"></button>
+      </p-card>
+    </ng-template>
+  </p-timeline>
+</div>

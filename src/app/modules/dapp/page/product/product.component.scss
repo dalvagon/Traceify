@@ -1,0 +1,71 @@
+@import "/src/scss/colors";
+@import "/src/scss/buttons";
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  color: $secondary;
+  padding: 20px;
+
+  :host ::ng-deep {
+    .product.p-card {
+      border-radius: 0% !important;
+      background-color: $secondary !important;
+      color: $primary !important;
+      margin: 1rem;
+
+      .p-card-content {
+        padding: 0px !important;
+
+        .content {
+          padding: 5px;
+
+          &>div {
+            margin: 10px 0px;
+          }
+
+          .parents {
+
+            .parent {
+              margin: 5px 0px;
+              display: flex;
+              align-items: center;
+
+              i {
+                margin-left: 5px;
+
+                &:hover {
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  :host ::ng-deep {
+
+    .timeline {
+      i {
+        border-radius: 50% !important;
+        padding: 2px !important;
+      }
+
+      .p-card {
+        border-radius: 0% !important;
+        background-color: $secondary !important;
+        color: $primary !important;
+
+        .p-card-content {
+          padding: 0px !important;
+
+          .description {
+            padding: 5px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -9,9 +9,12 @@ import { ProductComponent } from './page/product/product.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductsComponent } from './page/products/products.component';
+import { TimelineModule } from 'primeng/timeline';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
-  declarations: [LandingComponent, ModelComponent, ProductComponent, RequestComponent],
-  imports: [CommonModule, DappRoutingModule, ButtonModule, InputTextModule, InputTextareaModule, FormsModule, ReactiveFormsModule],
+  declarations: [LandingComponent, ModelComponent, ProductComponent, RequestComponent, ProductsComponent],
+  imports: [CommonModule, DappRoutingModule, ButtonModule, InputTextModule, InputTextareaModule, FormsModule, ReactiveFormsModule, TimelineModule, CardModule],
 })
 export class DappModule { }

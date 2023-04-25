@@ -1,7 +1,7 @@
 import { MessageService } from 'primeng/api';
 import { ManagerService } from 'src/app/data/service/manager.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-product',
@@ -35,9 +35,7 @@ export class CreateProductComponent implements OnInit {
   }
 
   addParentUid() {
-    const parentUid = this.form.controls['parentUid'].value?.toLocaleLowerCase();
-
-    console.log(parentUid);
+    const parentUid = this.form.controls['parentUid'].value?.toLocaleLowerCase().trim();
 
     if (parentUid && !this.parentUids.includes(parentUid)) {
       this.managerService.getProduct(parentUid).then((product: any) => {
@@ -97,7 +95,7 @@ export class CreateProductComponent implements OnInit {
     }
   }
 
-  emptyStringValidator(control: FormControl) {
+  emptyStringValidator(control: FormControl): ValidationErrors | null {
     return (control.value || '').trim().length === 0 ? { 'emptyString': true } : null;
   }
 }

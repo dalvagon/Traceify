@@ -66,12 +66,56 @@
               border-bottom: 1px solid $secondary !important;
 
               .uid {
-                font-size: 10px;
+                font-size: 12px;
+                padding: 5px;
                 user-select: all !important;
+                background-color: $secondary !important;
+                color: $primary !important;
+                opacity: 0.7;
+
+                i {
+                  margin-left: 5px;
+                  font-size: 10px;
+
+                  &:hover {
+                    cursor: pointer;
+                  }
+                }
               }
 
               .description {
-                padding: 20px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+              }
+
+              .parents {
+                .list {
+                  padding: 10px;
+
+                  .item {
+                    font-size: 10px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    margin-top: 5px;
+
+                    i {
+                      margin-left: 5px;
+                      font-size: 10px;
+
+                      &:hover {
+                        cursor: pointer;
+                      }
+                    }
+                  }
+                }
+              }
+
+              .operations {
+
+                .add-operation-button {
+                  margin: 10px !important;
+                }
               }
             }
           }

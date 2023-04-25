@@ -25,7 +25,7 @@ export class AdminComponent implements OnInit {
       for (const address of addresses) {
         const request = await this.adminService.getManagerRequest(address);
         if (request !== null) {
-          this.pendingRequests.push(request);
+          this.pendingRequests.push({ address: request.address, name: request.name, email: request.email, purpose: request.purpose, timestamp: request.timestamp, company: request.company, role: request.role, showCompanyAndRole: false });
         }
       }
 
@@ -73,6 +73,31 @@ export class AdminComponent implements OnInit {
     ).catch((error) => {
       console.log(error);
     });
+  }
+
+  switchShowCompnayAndRoleForPendingRequests(address: any) {
+    this.pendingRequests.forEach((request) => {
+      if (request.address === address) {
+        request.showCompanyAndRole = !request.showCompanyAndRole;
+      }
+    });
+  }
+
+  switchShowCompnayAndRoleForApprovedRequests(address: any) {
+    this.approvedRequests.forEach((request) => {
+      if (request.address === address) {
+        request.showCompanyAndRole = !request.showCompanyAndRole;
+      }
+    });
+  }
+
+  getAorAn(role: string) {
+    role = role.toLowerCase();
+    if (role.startsWith('a') || role.startsWith('e') || role.startsWith('i') || role.startsWith('o') || role.startsWith('u')) {
+      return 'an ' + role;
+    } else {
+      return 'a ' + role;
+    }
   }
 
   differenceInSeconds(timestamp: number) {

@@ -31,7 +31,7 @@ export class ManagerComponent implements OnInit {
               this.getProductUids().then(async (uids: any) => {
                 for (const uid of uids) {
                   const product = await this.getProduct(uid);
-                  this.products = [...this.products, { uid: uid, name: product.name, category: product.category, manufacturer: product.manufacturer, manufacturingDate: new Date(product.manufacturingDate).toLocaleDateString(), expiryDate: new Date(product.expiryDate).toLocaleDateString(), description: product.description }];
+                  this.products = [...this.products, product];
                 }
               });
             });
