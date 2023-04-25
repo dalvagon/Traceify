@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ProductService } from 'src/app/data/service/product.service';
 
 @Component({
@@ -13,10 +14,14 @@ export class ProductComponent implements OnInit {
   productParents: any[] = [];
   events: any[] = [];
   showProductDescription: boolean = false;
+  showProductQrCode: boolean = false;
+  dataLoaded = false;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show();
+
     this.uid = this.route.params.subscribe(async params => {
       this.uid = params['uid'];
       this.productParents = [];
@@ -27,6 +32,8 @@ export class ProductComponent implements OnInit {
         {
           this.events = await this.buildEvents();
           await this.getProductParents();
+          this.dataLoaded = true;
+          this.spinner.hide();
         }
       }
     });
@@ -66,5 +73,9 @@ export class ProductComponent implements OnInit {
 
   toggleDescription(event: any) {
     event.showDescription = !event.showDescription;
+  }
+
+  toggleProductQrCode() {
+    this.showProductQrCode = !this.showProductQrCode;
   }
 }

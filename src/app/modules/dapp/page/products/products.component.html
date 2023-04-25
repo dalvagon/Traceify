@@ -1,1 +1,21 @@
-<p>products works!</p>
+<div class="container">
+  <div class="title">Trace a product's journey by simply entering or scanning it's uid</div>
+
+  <ngx-scanner-qrcode #action="scanner" [config]="config" (event)="onEvent($event)"
+    [ngClass]="showVideo ? 'show-qr-scanner' : 'hide-qr-scanner'"></ngx-scanner-qrcode>
+
+  <label for="uid">Search a product's trace using its uid</label>
+  <span class="p-input-icon-right input">
+    <i class="pi pi-arrow-right" (click)="submit()"></i>
+    <input type="text" pInputText [(ngModel)]="uid" class="input-text2" />
+  </span>
+
+  <div class="divider">
+    <p-divider align="center">
+      <span>Or</span>
+    </p-divider>
+  </div>
+
+  <button type="button" pButton class="button-filled scan-button" (click)="startAction()" label="Scan its qr code"
+    icon="pi pi-qrcode"></button>
+</div>

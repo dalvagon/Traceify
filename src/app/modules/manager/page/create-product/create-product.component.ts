@@ -18,7 +18,6 @@ export class CreateProductComponent implements OnInit {
     expiryDate: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required, this.emptyStringValidator]),
     parentUid: new FormControl(''),
-    // image: new FormControl('', [Validators.required, this.emptyStringValidator]),
   });
   parentUids: string[] = [];
   parents: any[] = [];

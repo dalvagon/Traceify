@@ -1,6 +1,7 @@
 import { WalletService } from 'src/app/data/service/wallet.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { ManagerService } from 'src/app/data/service/manager.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-manager',
@@ -18,10 +19,13 @@ export class ManagerComponent implements OnInit {
     { field: 'manufacturingDate', header: 'Manufacturing Date' },
     { field: 'expiryDate', header: 'Expiry Date' },
   ];
+  dataLoaded = false;
 
-  constructor(private managerService: ManagerService, private walletService: WalletService, private ngZone: NgZone) { }
+  constructor(private managerService: ManagerService, private walletService: WalletService, private ngZone: NgZone, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    this.spinner.show();
+
     if (this.walletService.canMakeCalls()) {
       this.accountSubscription = this.walletService.accountChange$.subscribe(
         (account: any) => {
@@ -33,6 +37,9 @@ export class ManagerComponent implements OnInit {
                   const product = await this.getProduct(uid);
                   this.products = [...this.products, product];
                 }
+
+                this.dataLoaded = true;
+                this.spinner.hide();
               });
             });
           }

@@ -1,4 +1,9 @@
-<div class="container">
+<div class="loading" *ngIf="!dataLoaded">
+  <ngx-spinner bdColor="#1D1927" size="medium" color="#FFF3FA" type="ball-clip-rotate"
+    [fullScreen]="false"></ngx-spinner>
+</div>
+
+<div class="container" *ngIf="dataLoaded">
   <div class="null-product" *ngIf="product === null">Product with this uid does not exist.</div>
   <p-card *ngIf="product" [header]="product.name" [subheader]="product.timestamp" styleClass="product">
     <div *ngIf="showProductDescription" class="content">
@@ -23,7 +28,11 @@
           {{ parent.name }} <i class="pi pi-external-link" [routerLink]="['/product', parent.uid]"></i>
         </div>
       </div>
-      <div></div>
+      <qrcode *ngIf="showProductQrCode" [qrdata]="product.uid" [errorCorrectionLevel]="'M'" [allowEmptyString]="true"
+        [width]="100" colorDark="#1D1927" colorLight="#FFF3FA">
+      </qrcode>
+      <button pButton [label]="showProductQrCode ? 'Hide QR code' : 'Show QR code'" class="button-filled-reversed"
+        (click)="toggleProductQrCode()"></button>
     </div>
     <button pButton [label]="showProductDescription ? 'Read less' : 'Read more'" class="button-outline-reversed"
       (click)="toggleProductDescription()"></button>

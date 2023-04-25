@@ -1,0 +1,55 @@
+@import "/src/scss/colors";
+@import "/src/scss/buttons";
+@import "/src/scss/forms";
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  background: $gradient2;
+  padding: 100px;
+  color: $primary !important;
+
+  .title {
+    font-size: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block !important;
+    margin-top: 15px !important;
+    margin-bottom: 5px !important;
+    font-size: 15px !important;
+    letter-spacing: 5px;
+  }
+
+  .input {
+    width: 100%;
+
+    i {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .divider {
+    width: 100%;
+  }
+
+  .scan-button {
+    font-size: 20px;
+    display: block;
+    margin: 0 auto !important;
+  }
+
+  .hide-qr-scanner {
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .show-qr-scanner {
+    width: 100%;
+    height: 100%;
+  }
+}

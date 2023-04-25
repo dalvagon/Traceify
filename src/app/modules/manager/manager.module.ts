@@ -1,3 +1,4 @@
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { ManagerRoutingModule } from './manager-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,6 +12,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
 import { AddOperationComponent } from './page/add-operation/add-operation.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [CreateProductComponent, ManagerComponent, AddOperationComponent],
@@ -24,7 +26,9 @@ import { AddOperationComponent } from './page/add-operation/add-operation.compon
     InputTextareaModule,
     TooltipModule,
     CalendarModule,
-    TableModule
+    TableModule,
+    QRCodeModule,
+    NgxSpinnerModule
   ]
 })
 export class ManagerModule { }
