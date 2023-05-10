@@ -56,6 +56,10 @@ export class ProductComponent implements OnInit {
       })
     }
 
+    events.sort((a, b) => {
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
+    });
+
     return events;
   }
 

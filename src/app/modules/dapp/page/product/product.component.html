@@ -1,5 +1,5 @@
 <div class="loading" *ngIf="!dataLoaded">
-  <ngx-spinner bdColor="#1D1927" size="medium" color="#FFF3FA" type="ball-clip-rotate"
+  <ngx-spinner bdColor="#06131a" size="medium" color="#ECF8BA" type="ball-clip-rotate"
     [fullScreen]="false"></ngx-spinner>
 </div>
 
@@ -29,7 +29,7 @@
         </div>
       </div>
       <qrcode *ngIf="showProductQrCode" [qrdata]="product.uid" [errorCorrectionLevel]="'M'" [allowEmptyString]="true"
-        [width]="100" colorDark="#1D1927" colorLight="#FFF3FA">
+        [width]="100" colorDark="#06131a" colorLight="#ECF8BA">
       </qrcode>
       <button pButton [label]="showProductQrCode ? 'Hide QR code' : 'Show QR code'" class="button-filled-reversed"
         (click)="toggleProductQrCode()"></button>

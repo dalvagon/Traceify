@@ -75,4 +75,12 @@ export class ManagerService {
       return await contract['getManagerProducts']();
     }
   }
+
+  public async transferOwnership(uid: any, newOwner: any) {
+    const contract = await this.contractsService.getContractInstance();
+
+    if (typeof contract !== 'undefined') {
+      return contract['transferProductOwnership'](uid, newOwner);
+    }
+  }
 }

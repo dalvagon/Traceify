@@ -1,5 +1,6 @@
 @import "/src/scss/colors";
 @import "/src/scss/buttons";
+@import "/src/scss/forms";
 
 .loading {
   width: 80%;
@@ -121,9 +122,31 @@
               }
 
               .operations {
+                display: flex;
+                flex-direction: row;
 
-                .add-operation-button {
+                .add-operation-button,
+                .transfer-ownership-button {
                   margin: 10px !important;
+                }
+
+                .confirm-button {
+                  margin: 10px !important;
+                }
+
+                .form {
+                  margin: auto;
+                  height: max-content;
+
+                  label {
+                    margin-bottom: 5px !important;
+                    font-size: 15px !important;
+                    margin-top: 15px !important;
+                    letter-spacing: 5px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                  }
                 }
               }
             }
@@ -147,5 +170,6 @@
         }
       }
     }
+
   }
 }

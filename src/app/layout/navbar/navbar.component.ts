@@ -57,6 +57,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
             if (this.isManager && this.router.url.includes('/admin')) {
               this.router.navigate(['/manager']);
             }
+          } else {
+            this.isAdmin = false;
+            this.isManager = false;
           }
 
           this.ngZone.run(() => {

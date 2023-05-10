@@ -10,7 +10,7 @@ export class ContractsService {
   private provider: any;
 
   constructor() {
-    this.connectToWeb3();
+    this.createProvider();
   }
 
   /**
@@ -30,6 +30,10 @@ export class ContractsService {
    * Create a provider using the ethereum object injected by metamask
    */
   public createProvider() {
+    if (typeof this.ethereum === 'undefined') {
+      this.connectToWeb3();
+    }
+
     this.provider = new ethers.providers.Web3Provider(this.ethereum);
   }
 
@@ -63,6 +67,10 @@ export class ContractsService {
     }
 
     return new ethers.Contract(contract.address, contract.abi, signer);
+  }
+
+  public async getContractInstanceWithoutSigner() {
+    return new ethers.Contract(contract.address, contract.abi, this.getProvider());
   }
 
   public async hasRole(role: any) {

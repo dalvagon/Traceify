@@ -1,9 +1,9 @@
 <div class="loading" *ngIf="!dataLoaded">
-  <ngx-spinner bdColor="#1D1927" size="medium" color="#FFF3FA" type="ball-clip-rotate"
+  <ngx-spinner bdColor="#06131a" size="medium" color="#ECF8BA" type="ball-clip-rotate"
     [fullScreen]="false"></ngx-spinner>
 </div>
 
-<div class="container">
+<div class="container" *ngIf="dataLoaded">
   <div class="header">
     <div class="title">Your products</div>
     <button type="button" pButton label="Create a new product" class="button-outline"
@@ -35,7 +35,7 @@
         <td colspan="6">
           <div class="expanded">
             <div class="uid">
-              {{ product.uid }} <i class="pi pi-external-link" [routerLink]="['/product', product.uid]"></i>
+              View your product here <i class="pi pi-external-link" [routerLink]="['/product', product.uid]"></i>
             </div>
             <div class="description">
               {{ product.description }}
@@ -44,13 +44,29 @@
               <div class="title">This product is derived from:</div>
               <div class="list">
                 <div class="item" *ngFor="let parent of product.parents">
-                  {{ parent }} <i class="pi pi-external-link" [routerLink]="['/product', parent]"></i>
+                  {{ parent.name }} <i class="pi pi-external-link" [routerLink]="['/product', parent.uid]"></i>
                 </div>
               </div>
             </div>
             <div class="operations">
               <button type="button" pButton label="Add operation" class="button-outline add-operation-button"
                 [routerLink]="['/manager/add-operation', product.uid]"></button>
+
+              <p-dialog header="Transfer ownership of your product" [(visible)]="transferOwnershipDialogVisisble"
+                [modal]="true" [style]="{ width: '40vw' }" [draggable]="false" [resizable]="false" styleClass="dialog">
+                <form [formGroup]="form" (ngSubmit)="confirmTransferOwnership(product.uid)">
+                  <label for="new-owner">The new owner's address</label>
+                  <input type="text" pInputText formControlName="newOwner" class="input-text1" />
+                  <small class="error"
+                    *ngIf="(form.controls['newOwner'].touched || submitted) && (form.controls['newOwner'].errors?.required || form.controls['newOwner'].errors?.emptyString)">
+                    New owner is required</small>
+                  <button type="submit" pButton label="Confirm" class="button-outline confirm-button"
+                    [loading]="loading"></button>
+                </form>
+              </p-dialog>
+
+              <button type="button" pButton label="Transfer ownership" class="button-filled transfer-ownership-button"
+                (click)="transferOwnership()"></button>
             </div>
           </div>
         </td>

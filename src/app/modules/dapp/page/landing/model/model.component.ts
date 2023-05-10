@@ -76,7 +76,7 @@ export class ModelComponent implements OnInit {
     this.camera.position.z = 300;
     this.scene.add(this.camera);
 
-    this.light = new THREE.AmbientLight(new THREE.Color('#00955B'), 0.9);
+    this.light = new THREE.AmbientLight(new THREE.Color('#5ADFDF'), 0.9);
     this.light.position.z = 10;
     this.scene.add(this.light);
 

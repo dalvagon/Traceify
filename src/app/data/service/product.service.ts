@@ -11,7 +11,7 @@ export class ProductService {
   constructor(private contractsService: ContractsService, private ipfs: IpfsService, private util: UtilService) { }
 
   public async getProduct(uid: any) {
-    const contract = await this.contractsService.getContractInstance();
+    const contract = await this.contractsService.getContractInstanceWithoutSigner();
 
     if (typeof contract !== 'undefined') {
       const product = await contract['getProduct'](uid);
@@ -45,7 +45,7 @@ export class ProductService {
     return {
       name: ipfsObj.name,
       category: ipfsObj.category,
-      date: new Date(ipfsObj.date).toLocaleDateString(),
+      date: new Date(ipfsObj.date).toDateString(),
       description: ipfsObj.description,
     };
   }
