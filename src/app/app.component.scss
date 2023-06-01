@@ -9,6 +9,18 @@
   user-select: none;
   font-weight: bolder;
   text-transform: uppercase !important;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $primary;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $secondary;
+  }
 }
 
 ::ng-deep html,

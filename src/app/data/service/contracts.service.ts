@@ -14,9 +14,23 @@ export class ContractsService {
   }
 
   /**
-   * Connect to web3 using the ethereum object injected by metamask
-   */
+  * Connect to web3 using the ethereum object injected by metamask
+  */
   private connectToWeb3() {
+    const ethereum = (window as any).ethereum;
+    if (typeof ethereum !== 'undefined') {
+      this.ethereum = ethereum;
+      this.createProvider();
+    } else {
+      window.addEventListener('ethereum#initialized', this.handleEthereum, {
+        once: true,
+      });
+
+      setTimeout(this.handleEthereum, 3000);
+    }
+  }
+
+  private handleEthereum() {
     const ethereum = (window as any).ethereum;
     if (typeof ethereum !== 'undefined') {
       this.ethereum = ethereum;

@@ -27,6 +27,21 @@ export class WalletService implements OnDestroy {
       this.createListeners();
       this.connectWallet();
     } else {
+      window.addEventListener('ethereum#initialized', this.handleEthereum, {
+        once: true,
+      });
+
+      setTimeout(this.handleEthereum, 3000);
+    }
+  }
+
+  private handleEthereum() {
+    const ethereum = (window as any).ethereum;
+    if (typeof ethereum !== 'undefined') {
+      this.ethereum = ethereum;
+      this.createListeners();
+      this.connectWallet();
+    } else {
       console.log('No web3? You should consider trying MetaMask!');
     }
   }
