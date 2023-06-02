@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ManagerGuard } from 'src/app/core/guard/manager.guard';
 import { CreateProductComponent } from './page/create-product/create-product.component';
+import { StatsComponent } from './page/stats/stats.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,13 @@ const routes: Routes = [
   },
   {
     path: 'add-operation/:uid',
-    component: AddOperationComponent
+    component: AddOperationComponent,
+    canActivate: [ManagerGuard],
+  },
+  {
+    path: 'stats',
+    component: StatsComponent,
+    canActivate: [ManagerGuard],
   }
 ];
 

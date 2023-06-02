@@ -32,18 +32,12 @@
             <p-calendar formControlName="manufacturingDate" dateFormat="dd-mm-yy" styleClass="calendar"
               [hideOnDateTimeSelect]="false" [showIcon]="true" (onSelect)="manufacturingDateSelected()">
             </p-calendar>
-            <small class="error"
-              *ngIf="(form.controls['manufacturingDate'].touched || submitted) && (form.controls['manufacturingDate'].errors?.required || form.controls['manufacturingDate'].errors?.emptyString)">
-              Manufacturing date is required</small>
           </div>
           <div class="date">
             <label for="expiryDate">EXPIRY DATE</label>
             <p-calendar formControlName="expiryDate" dateFormat="dd-mm-yy" styleClass="calendar"
               [hideOnDateTimeSelect]="false" [showIcon]="true" [minDate]="expiryMinDate">
             </p-calendar>
-            <small class="error"
-              *ngIf="(form.controls['expiryDate'].touched || submitted) && (form.controls['expiryDate'].errors?.required || form.controls['expiryDate'].errors?.emptyString)">
-              Expiry date is required</small>
           </div>
         </div>
 

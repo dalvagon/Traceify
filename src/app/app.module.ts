@@ -12,10 +12,11 @@ import { LogoComponent } from './layout/logo/logo.component';
 import { MessageService } from 'primeng/api';
 import { TitleComponent } from './layout/title/title.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, ContentLayoutComponent, NavbarComponent, FooterComponent, LogoComponent, TitleComponent],
-  imports: [BrowserModule, NgxSpinnerModule, AppRoutingModule, ButtonModule, BrowserAnimationsModule, ToastModule],
+  imports: [BrowserModule, NgxSpinnerModule, AppRoutingModule, ButtonModule, BrowserAnimationsModule, ToastModule, HttpClientModule],
   exports: [NgxSpinnerModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [MessageService],

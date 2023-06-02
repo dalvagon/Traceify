@@ -26,12 +26,12 @@ export class ProductService {
         name: ipfsObj.name,
         category: ipfsObj.category,
         manufacturer: ipfsObj.manufacturer,
-        manufacturingDate: new Date(ipfsObj.manufacturingDate).toDateString(),
-        expiryDate: new Date(ipfsObj.expiryDate).toDateString(),
+        manufacturingDate: ipfsObj.manufacturingDate ? new Date(ipfsObj.manufacturingDate).toDateString() : null,
+        expiryDate: ipfsObj.expiryDate ? new Date(ipfsObj.expiryDate).toDateString() : null,
         description: ipfsObj.description,
         parents: product[1],
         operations: product[2],
-        timestamp: new Date(product[3] * 1000).toDateString()
+        timestamp: new Date(product[3] * 1000).toDateString(),
       }
     }
 
@@ -47,6 +47,7 @@ export class ProductService {
       category: ipfsObj.category,
       date: new Date(ipfsObj.date).toDateString(),
       description: ipfsObj.description,
+      operationProducts: ipfsObj.operationProductUids
     };
   }
 }

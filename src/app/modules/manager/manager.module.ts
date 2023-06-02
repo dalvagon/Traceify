@@ -14,9 +14,12 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { AddOperationComponent } from './page/add-operation/add-operation.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { StatsComponent } from './page/stats/stats.component';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+
 
 @NgModule({
-  declarations: [CreateProductComponent, ManagerComponent, AddOperationComponent],
+  declarations: [CreateProductComponent, ManagerComponent, AddOperationComponent, StatsComponent],
   imports: [
     CommonModule,
     ManagerRoutingModule,
@@ -30,7 +33,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     TableModule,
     DialogModule,
     QRCodeModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    CanvasJSAngularChartsModule
   ]
 })
 export class ManagerModule { }

@@ -45,6 +45,7 @@ export class ProductComponent implements OnInit {
       const uid = opArr[0];
       const timestamp = new Date(opArr[1] * 1000).toLocaleDateString();
       const op = await this.productService.getOperation(uid);
+      const operationProducts = await this.getOperationProducts(op.operationProducts);
 
       events.push({
         title: op.name,
@@ -52,7 +53,8 @@ export class ProductComponent implements OnInit {
         date: op.date,
         description: op.description,
         timestamp: timestamp,
-        showDescription: false
+        operationProducts: operationProducts,
+        showDescription: false,
       })
     }
 
@@ -61,6 +63,17 @@ export class ProductComponent implements OnInit {
     });
 
     return events;
+  }
+
+  async getOperationProducts(operationProductsIds: any[]) {
+    let products = [];
+
+    for (let uid of operationProductsIds) {
+      const product = await this.productService.getProduct(uid);
+      products.push(product);
+    }
+
+    return products;
   }
 
   async getProductParents() {

@@ -33,6 +33,23 @@
           *ngIf="(form.controls['description'].touched || submitted) && (form.controls['description'].errors?.required || form.controls['description'].errors?.emptyString)">
           Description is required</small>
 
+        <label for="derived">Products involved in this operation
+          <i class="pi pi-info-circle" pTooltip="Add the uids of the products that are involved in this operation"></i>
+        </label>
+        <div class="p-inputgroup">
+          <input type="text" pInputText formControlName="operationProductuid"
+            class="input-text1 operation-product-uid" />
+          <button type="button" pButton icon="pi pi-plus" class="button-filled"
+            (click)="addOperationProduct()"></button>
+        </div>
+        <div class="derived">
+          <div class="derived-item" *ngFor="let product of operationProducts">
+            <div class="derived-item-text">{{ product.name }}</div>
+            <button type="button" pButton icon="pi pi-trash" class="button-filled-reversed"
+              (click)="removeOperationProduct(product.uid)"></button>
+          </div>
+        </div>
+
         <button type="submit" pButton label="Add operation" class="button-filled add-op-button"
           [loading]="loading"></button>
       </form>

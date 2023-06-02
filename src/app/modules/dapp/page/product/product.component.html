@@ -10,16 +10,16 @@
       <div class="description">
         {{ product.description }}
       </div>
-      <div class="categoty">
+      <div class="category">
         Product category: {{ product.category }}
       </div>
       <div class="manufacturer">
         Manufacturer: {{ product.manufacturer }}
       </div>
-      <div class="manufacturingDate">
+      <div *ngIf="product.manufacturingDate" class="manufacturingDate">
         Manufacturing date: {{ product.manufacturingDate }}
       </div>
-      <div class="expiryDate">
+      <div *ngIf="product.expiryDate" class="expiryDate">
         Expiry date: {{ product.expiryDate }}
       </div>
       <div class="parents" *ngIf="productParents.length > 0">
@@ -45,9 +45,16 @@
     </ng-template>
     <ng-template pTemplate="content" let-event>
       <p-card [header]="event.title" [subheader]="event.date">
-        <p *ngIf="event.showDescription" class="description">
+        <div *ngIf="event.showDescription" class="description">
           {{ event.description }}
-        </p>
+
+          <div *ngIf="event.operationProducts.length > 0" class="operation-products">
+            <p>The following products were used in this operation:</p>
+            <div *ngFor="let product of event.operationProducts" class="operation-product">
+              {{ product.name }} <i class="pi pi-external-link" [routerLink]="['/product', product.uid]"></i>
+            </div>
+          </div>
+        </div>
         <button pButton [label]="event.showDescription ? 'Read less' : 'Read more'" class="button-outline-reversed"
           (click)="toggleDescription(event)"></button>
       </p-card>

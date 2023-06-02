@@ -17,8 +17,8 @@ export class CreateProductComponent implements OnInit {
     name: new FormControl('', [Validators.required, this.emptyStringValidator]),
     category: new FormControl('', [Validators.required, this.emptyStringValidator]),
     manufacturer: new FormControl('', [Validators.required, this.emptyStringValidator]),
-    manufacturingDate: new FormControl('', [Validators.required]),
-    expiryDate: new FormControl('', [Validators.required]),
+    manufacturingDate: new FormControl(''),
+    expiryDate: new FormControl(''),
     description: new FormControl('', [Validators.required, this.emptyStringValidator]),
     parentUid: new FormControl(''),
   });

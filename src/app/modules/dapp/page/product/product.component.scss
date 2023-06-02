@@ -72,6 +72,11 @@
 
           .description {
             padding: 5px;
+
+            .operation-products {
+              padding: 5px;
+              border-top: 1px solid $primary;
+            }
           }
         }
       }
