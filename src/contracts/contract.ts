@@ -1,6 +1,121 @@
 export const contract = {
-  address: '0xb223242Ae8AC497aA5d4201340a1234A38FbFE47',
+  address: '0xeb5Bd15225700C719b3eeA74189CfD36cA027cA0',
   abi: [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "ManagerAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "ManagerRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "ManagerRequestApproved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "ManagerRequestDenied",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "ManagerRequestSubmitted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "uid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "ipfsHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "OperationAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "uid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "ipfsHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProductCreated",
+      "type": "event"
+    },
     {
       "anonymous": false,
       "inputs": [
@@ -110,17 +225,30 @@ export const contract = {
           "type": "bytes32"
         },
         {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "addManagerForProduct",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "bytes32",
-          "name": "informationHash",
+          "name": "uid",
           "type": "bytes32"
         },
         {
-          "internalType": "bytes32[]",
-          "name": "parentUIDs",
-          "type": "bytes32[]"
+          "internalType": "bytes32",
+          "name": "ipfsHash",
+          "type": "bytes32"
         }
       ],
-      "name": "addProduct",
+      "name": "addOperation",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -141,12 +269,17 @@ export const contract = {
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
+          "internalType": "bytes32",
+          "name": "uid",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "ipfsHash",
+          "type": "bytes32"
         }
       ],
-      "name": "denyManagerRequest",
+      "name": "createProduct",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -166,25 +299,12 @@ export const contract = {
     },
     {
       "inputs": [],
-      "name": "getApprovedManagerRequestsAddresses",
+      "name": "getApprovedManagerRequestAddresses",
       "outputs": [
         {
           "internalType": "address[]",
           "name": "",
           "type": "address[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getManagerProducts",
-      "outputs": [
-        {
-          "internalType": "bytes32[]",
-          "name": "",
-          "type": "bytes32[]"
         }
       ],
       "stateMutability": "view",
@@ -240,23 +360,18 @@ export const contract = {
           "type": "bytes32"
         }
       ],
-      "name": "getProduct",
+      "name": "getOperations",
       "outputs": [
-        {
-          "internalType": "bytes32",
-          "name": "",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "bytes32[]",
-          "name": "",
-          "type": "bytes32[]"
-        },
         {
           "components": [
             {
               "internalType": "bytes32",
-              "name": "informationHash",
+              "name": "uid",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "ipfsHash",
               "type": "bytes32"
             },
             {
@@ -268,11 +383,55 @@ export const contract = {
           "internalType": "struct ProductHistory.Operation[]",
           "name": "",
           "type": "tuple[]"
-        },
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
         {
-          "internalType": "uint256",
+          "internalType": "bytes32",
+          "name": "uid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getProduct",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "uid",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "ipfsHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ProductHistory.Product",
           "name": "",
-          "type": "uint256"
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getProducts",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
         }
       ],
       "stateMutability": "view",
@@ -390,6 +549,19 @@ export const contract = {
     {
       "inputs": [
         {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "rejectManagerRequest",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "bytes32",
           "name": "role",
           "type": "bytes32"
@@ -401,6 +573,19 @@ export const contract = {
         }
       ],
       "name": "renounceRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "uid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "renounceRoleForProduct",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -454,42 +639,6 @@ export const contract = {
       ],
       "stateMutability": "view",
       "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "uid",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "address",
-          "name": "newManager",
-          "type": "address"
-        }
-      ],
-      "name": "transferProductOwnership",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "uid",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "bytes32",
-          "name": "informationHash",
-          "type": "bytes32"
-        }
-      ],
-      "name": "updateProduct",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
     }
-  ],
+  ]
 };

@@ -16,6 +16,8 @@ import { AddOperationComponent } from './page/add-operation/add-operation.compon
 import { QRCodeModule } from 'angularx-qrcode';
 import { StatsComponent } from './page/stats/stats.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
+import { DividerModule } from 'primeng/divider';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
     DialogModule,
     QRCodeModule,
     NgxSpinnerModule,
-    CanvasJSAngularChartsModule
+    CanvasJSAngularChartsModule,
+    NgxScannerQrcodeModule,
+    DividerModule
   ]
 })
 export class ManagerModule { }

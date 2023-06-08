@@ -2,14 +2,16 @@ import { MessageService } from 'primeng/api';
 import { FormBuilder, FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { ManagerService } from 'src/app/data/service/manager.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ProductService } from 'src/app/data/service/product.service';
+import { NgxScannerQrcodeComponent, ScannerQRCodeConfig } from 'ngx-scanner-qrcode';
 
 @Component({
   selector: 'app-add-operation',
   templateUrl: './add-operation.component.html',
   styleUrls: ['./add-operation.component.scss']
 })
-export class AddOperationComponent implements OnInit {
+export class AddOperationComponent implements OnInit, OnDestroy {
   form = this.fb.group({
     uid: new FormControl({ value: '', disabled: true }, { validators: [Validators.required], updateOn: 'change' }),
     name: new FormControl('', [Validators.required, this.emptyStringValidator]),
@@ -24,33 +26,72 @@ export class AddOperationComponent implements OnInit {
   loading = false;
   submitted = false;
 
-  constructor(private route: ActivatedRoute, private managreService: ManagerService, private fb: FormBuilder, private messageService: MessageService) { }
+  @ViewChild('action')
+  action!: NgxScannerQrcodeComponent;
+  public config: ScannerQRCodeConfig = {
+    vibrate: 400,
+    deviceActive: 1,
+    constraints: {
+      facingMode: "environment",
+      audio: false,
+      video: {
+        width: window.innerWidth
+      }
+    }
+  };
+  showVideo = false;
+
+  constructor(private route: ActivatedRoute, private managreService: ManagerService, private productService: ProductService, private fb: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.form.controls['uid'].setValue(this.uid);
   }
 
-  addOperationProduct() {
+  ngOnDestroy(): void {
+    this.action.stop();
+  }
+
+  getOperaionProductUid() {
     const operationProductUid = this.form.controls['operationProductuid'].value?.toLocaleLowerCase().trim();
 
     if (operationProductUid) {
-      this.managreService.getProduct(operationProductUid).then((product: any) => {
-        if (product) {
-          this.operationProductUids.push(operationProductUid);
-          this.operationProducts.push({ uid: operationProductUid, name: product.name });
-          this.form.controls['operationProductuid'].setValue('');
-        }
-      }).catch((error: any) => {
-        console.log(error);
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: "Encountered an error while fetching the product. Please try again." });
-      });
+      this.addOperationProduct(operationProductUid);
+      this.form.controls['operationProductuid'].setValue('');
     }
+  }
+
+  addOperationProduct(uid: string) {
+    this.productService.getProduct(uid).then((product: any) => {
+      if (product && !this.operationProductUids.includes(uid)) {
+        this.operationProductUids.push(uid);
+        this.operationProducts.push({ uid: uid, name: product.name });
+      }
+    }).catch((error: any) => {
+      console.log(error);
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: error.reason });
+    });
   }
 
   removeOperationProduct(operationProductUid: string) {
     this.operationProductUids = this.operationProductUids.filter((operationProductUid_: string) => operationProductUid_ !== operationProductUid);
     this.operationProducts = this.operationProducts.filter((operationProduct: any) => operationProduct.uid !== operationProductUid);
+  }
+
+  startAction() {
+    this.showVideo = true;
+    this.action.start();
+  }
+
+  onEvent(event: any) {
+    this.uid = event[0].value.trim().toLowerCase();
+
+    if (this.uid) {
+      this.addOperationProduct(this.uid);
+
+      this.showVideo = false;
+      this.action.stop();
+    }
   }
 
   submit() {
@@ -74,7 +115,7 @@ export class AddOperationComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Operation added successfully. It will appear in the product\'s history after the transaction is complete.' });
       }).catch((error: any) => {
         this.loading = false;
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: "Encountered an error while adding the operation. Please try again." });
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.reason });
       });
     }
   }

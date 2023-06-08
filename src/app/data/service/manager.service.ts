@@ -21,37 +21,24 @@ export class ManagerService {
     }
   }
 
-  public async createProduct(uid: any, product: any, parentUids: any[]) {
+  public async createProduct(product: any) {
     const contract = await this.contractsService.getContractInstance();
 
     if (typeof contract !== 'undefined') {
       const ipfsObj = await this.ipfs.uploadData(JSON.stringify(product));
       const ipfsHash = this.util.getBytes32FromIpfsHash(ipfsObj.path);
 
-      return contract['addProduct'](uid, ipfsHash, parentUids);
+      return contract['createProduct'](product.uid, ipfsHash);
     }
   }
 
-  public async getProduct(uid: any) {
+  public async getProductOperations(uid: any) {
     const contract = await this.contractsService.getContractInstance();
 
     if (typeof contract !== 'undefined') {
-      const product = await contract['getProduct'](uid);
-      const ipfsHash = this.util.getIpfsHashFromBytes32(product[0]);
-      const ipfsObj = await this.ipfs.downloadData(ipfsHash);
+      const operations = await contract['getOperations'](uid);
 
-      return {
-        uid: uid,
-        name: ipfsObj.name,
-        category: ipfsObj.category,
-        manufacturer: ipfsObj.manufacturer,
-        manufacturingDate: new Date(ipfsObj.manufacturingDate).toDateString(),
-        expiryDate: new Date(ipfsObj.expiryDate).toDateString(),
-        description: ipfsObj.description,
-        parents: product[1],
-        operations: product[2],
-        timestamp: new Date(product[3] * 1000).toDateString()
-      }
+      console.log(operations);
     }
 
     return null;
@@ -64,7 +51,7 @@ export class ManagerService {
       const ipfsObj = await this.ipfs.uploadData(JSON.stringify(op));
       const ipfsHash = this.util.getBytes32FromIpfsHash(ipfsObj.path);
 
-      return contract['updateProduct'](uid, ipfsHash);
+      return contract['addOperation'](uid, ipfsHash);
     }
   }
 
@@ -72,15 +59,15 @@ export class ManagerService {
     const contract = await this.contractsService.getContractInstance();
 
     if (typeof contract !== 'undefined') {
-      return await contract['getManagerProducts']();
+      return await contract['getProducts']();
     }
   }
 
-  public async transferOwnership(uid: any, newOwner: any) {
+  public async addManager(uid: any, manager: any) {
     const contract = await this.contractsService.getContractInstance();
 
     if (typeof contract !== 'undefined') {
-      return contract['transferProductOwnership'](uid, newOwner);
+      return contract['addManagerForProduct'](uid, manager);
     }
   }
 }

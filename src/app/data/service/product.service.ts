@@ -15,23 +15,22 @@ export class ProductService {
 
     if (typeof contract !== 'undefined') {
       const product = await contract['getProduct'](uid);
-
-      if (product[0] === formatBytes32String('')) return null;
-
-      const ipfsHash = this.util.getIpfsHashFromBytes32(product[0]);
+      const ipfsHash = this.util.getIpfsHashFromBytes32(product[1]);
       const ipfsObj = await this.ipfs.downloadData(ipfsHash);
 
+      const productOperations = await contract['getOperations'](uid);
+
       return {
-        uid: uid,
+        uid: ipfsObj.uid,
         name: ipfsObj.name,
         category: ipfsObj.category,
         manufacturer: ipfsObj.manufacturer,
         manufacturingDate: ipfsObj.manufacturingDate ? new Date(ipfsObj.manufacturingDate).toDateString() : null,
         expiryDate: ipfsObj.expiryDate ? new Date(ipfsObj.expiryDate).toDateString() : null,
         description: ipfsObj.description,
-        parents: product[1],
-        operations: product[2],
-        timestamp: new Date(product[3] * 1000).toDateString(),
+        parentUids: ipfsObj.parentUids,
+        operations: productOperations,
+        timestamp: new Date(product[2] * 1000).toDateString(),
       }
     }
 

@@ -37,7 +37,7 @@ export class AdminService {
     const contract = await this.contractsService.getContractInstance();
 
     if (typeof contract !== 'undefined') {
-      return contract['getApprovedManagerRequestsAddresses']();
+      return contract['getApprovedManagerRequestAddresses']();
     }
   }
 
@@ -77,7 +77,7 @@ export class AdminService {
     const contract = await this.contractsService.getContractInstance();
 
     if (typeof contract !== 'undefined') {
-      return contract['denyManagerRequest'](address);
+      return contract['rejectManagerRequest'](address);
     }
   }
 }

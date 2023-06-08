@@ -14,6 +14,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   transactions: any = [];
   transactionsOptions: any;
   transactionsChart: any;
+  dataLoaded = false;
 
   constructor(private statsService: StatsService, private walletService: WalletService) { }
 
@@ -23,18 +24,12 @@ export class StatsComponent implements OnInit, OnDestroy {
         async (account: any) => {
           if (account !== null) {
             this.account = account;
+            this.dataLoaded = false;
+            this.transactions = [];
             this.getTransactions();
           }
         });
     }
-
-    this.transactionsOptions = {
-      data: this.transactions,
-      columns: [
-        { data: 'timestamp' },
-        { data: 'totalFee' }
-      ],
-    };
   }
 
   ngOnDestroy(): void {
@@ -43,13 +38,8 @@ export class StatsComponent implements OnInit, OnDestroy {
     }
   }
 
-  getTransactionsChart(chart: any) {
-    this.transactionsChart = chart;
-  }
-
   getTransactions() {
     this.statsService.getTransactions(this.account).pipe(first()).subscribe((res: any) => {
-      this.transactions = [];
       res.result.forEach((tx: any) => {
         this.statsService.getUsdPrice().subscribe((fee: any) => {
           this.transactions.push({
@@ -58,6 +48,19 @@ export class StatsComponent implements OnInit, OnDestroy {
           })
         });
       });
+      this.transactionsOptions = {
+        theme: "light2",
+        animationEnabled: true,
+        zoomEnabled: true,
+        title: {
+          text: "Market Capitalization of ACME Corp"
+        },
+        data: [{
+          type: "line",
+          dataPoints: this.transactions
+        }]
+      };
+      this.dataLoaded = true;
     });
   }
 }

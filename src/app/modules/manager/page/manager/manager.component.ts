@@ -3,6 +3,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { ManagerService } from 'src/app/data/service/manager.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ProductService } from 'src/app/data/service/product.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-manager',
@@ -21,14 +23,14 @@ export class ManagerComponent implements OnInit {
     { field: 'expiryDate', header: 'Expiry Date' },
   ];
   dataLoaded = false;
-  transferOwnershipDialogVisisble = false;
+  addManagerDialogVisible = false;
   loading = false;
   submitted = false;
   form = this.fb.group({
-    newOwner: new FormControl('', [Validators.required]),
+    manager: new FormControl('', [Validators.required]),
   });
 
-  constructor(private managerService: ManagerService, private fb: FormBuilder, private walletService: WalletService, private ngZone: NgZone, private spinner: NgxSpinnerService) { }
+  constructor(private managerService: ManagerService, private messageServie: MessageService, private productService: ProductService, private fb: FormBuilder, private walletService: WalletService, private ngZone: NgZone, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -46,9 +48,9 @@ export class ManagerComponent implements OnInit {
 
                   if (product !== null) {
                     const parents = [];
-                    for (const parent of product.parents) {
-                      const parentProduct = await this.getProduct(parent);
-                      parents.push(parentProduct);
+                    for (const parentUid of product.parentUids) {
+                      const parent = await this.getProduct(parentUid);
+                      parents.push(parent);
                     }
 
                     this.products.push({
@@ -79,25 +81,25 @@ export class ManagerComponent implements OnInit {
   }
 
   getProduct(uid: any) {
-    return this.managerService.getProduct(uid);
+    return this.productService.getProduct(uid);
   }
 
-  transferOwnership() {
-    this.transferOwnershipDialogVisisble = true;
+  addManager() {
+    this.addManagerDialogVisible = true;
   }
 
-  confirmTransferOwnership(uid: any) {
+  confirmAddManager(uid: any) {
     if (this.form.valid) {
-      const newOwner = this.form.controls['newOwner'].value?.trim().toLocaleLowerCase();
+      const manager = this.form.controls['manager'].value?.trim().toLocaleLowerCase();
       this.loading = true;
       this.submitted = true;
-      this.managerService.transferOwnership(uid, newOwner).then((result: any) => {
+      this.managerService.addManager(uid, manager).then((result: any) => {
         console.log(result);
         this.loading = false;
         this.submitted = false;
-        this.transferOwnershipDialogVisisble = false;
+        this.addManagerDialogVisible = false;
       }).catch((error: any) => {
-        console.log(error);
+        this.messageServie.add({ severity: 'error', summary: 'Error', detail: error.reason });
         this.loading = false;
       });
     }

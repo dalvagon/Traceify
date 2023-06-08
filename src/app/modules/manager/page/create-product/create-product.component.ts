@@ -2,6 +2,7 @@ import { MessageService } from 'primeng/api';
 import { ManagerService } from 'src/app/data/service/manager.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { ProductService } from 'src/app/data/service/product.service';
 
 @Component({
   selector: 'app-create-product',
@@ -29,7 +30,7 @@ export class CreateProductComponent implements OnInit {
   expiryMinDate: Date = new Date();
   confirmDialogVisible = false;
 
-  constructor(private fb: FormBuilder, private managerService: ManagerService, private messageService: MessageService) { }
+  constructor(private fb: FormBuilder, private managerService: ManagerService, private productService: ProductService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.managerService.generateUid().then((uid: string) => {
@@ -41,7 +42,7 @@ export class CreateProductComponent implements OnInit {
     const parentUid = this.form.controls['parentUid'].value?.toLocaleLowerCase().trim();
 
     if (parentUid && !this.parentUids.includes(parentUid)) {
-      this.managerService.getProduct(parentUid).then((product: any) => {
+      this.productService.getProduct(parentUid).then((product: any) => {
         if (product) {
           this.parentUids.push(parentUid);
           this.parents.push({ uid: parentUid, name: product.name });
@@ -70,15 +71,17 @@ export class CreateProductComponent implements OnInit {
     if (this.form.valid) {
       const uid = this.form.controls['uid'].value;
       const product = {
+        uid: uid,
         name: this.form.controls['name'].value,
         category: this.form.controls['category'].value,
         manufacturer: this.form.controls['manufacturer'].value,
         manufacturingDate: this.form.controls['manufacturingDate'].value,
         expiryDate: this.form.controls['expiryDate'].value,
         description: this.form.controls['description'].value,
+        parentUids: this.parentUids
       }
       this.loading = true;
-      this.managerService.createProduct(uid, product, this.parentUids).then(() => {
+      this.managerService.createProduct(product).then(() => {
         this.loading = false;
         this.submitted = false;
         this.form.reset();

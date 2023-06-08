@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/data/service/product.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class ProductComponent implements OnInit {
   showProductQrCode: boolean = false;
   dataLoaded = false;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private spinner: NgxSpinnerService) { }
+  constructor(private route: ActivatedRoute, private messageService: MessageService, private productService: ProductService, private spinner: NgxSpinnerService, private router: Router) { }
 
   ngOnInit() {
     this.spinner.show();
@@ -26,7 +27,10 @@ export class ProductComponent implements OnInit {
       this.uid = params['uid'];
       this.productParents = [];
 
-      this.product = await this.productService.getProduct(this.uid);
+      this.product = await this.productService.getProduct(this.uid).catch((error) => {
+        this.router.navigate(['/products']);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.reason });
+      });
 
       if (this.product !== null) {
         this.events = await this.buildEvents();
@@ -43,11 +47,12 @@ export class ProductComponent implements OnInit {
 
     for (let opArr of this.product.operations) {
       const uid = opArr[0];
-      const timestamp = new Date(opArr[1] * 1000).toLocaleDateString();
-      const op = await this.productService.getOperation(uid);
+      const timestamp = new Date(opArr[2] * 1000).toLocaleDateString();
+      const op = await this.productService.getOperation(opArr[1]);
       const operationProducts = await this.getOperationProducts(op.operationProducts);
 
       events.push({
+        uid: uid,
         title: op.name,
         icon: 'pi pi-circle',
         date: op.date,
@@ -77,9 +82,9 @@ export class ProductComponent implements OnInit {
   }
 
   async getProductParents() {
-    for (let parent of this.product.parents) {
-      const product = await this.productService.getProduct(parent);
-      this.productParents.push(product);
+    for (let parentUid of this.product.parentUids) {
+      const parent = await this.productService.getProduct(parentUid);
+      this.productParents.push(parent);
     }
   }
 
