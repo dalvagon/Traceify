@@ -1,18 +1,18 @@
 import { MessageService } from 'primeng/api';
 import { ManagerService } from 'src/app/data/service/manager.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/data/service/product.service';
+import { NgxScannerQrcodeComponent, ScannerQRCodeConfig } from 'ngx-scanner-qrcode';
 
 @Component({
   selector: 'app-create-product',
   templateUrl: './create-product.component.html',
   styleUrls: ['./create-product.component.scss']
 })
-export class CreateProductComponent implements OnInit {
+export class CreateProductComponent implements OnInit, OnDestroy {
   @ViewChild("qr")
   qr: any;
-
   form = this.fb.group({
     uid: new FormControl({ value: '', disabled: true }, { validators: [Validators.required], updateOn: 'change' }),
     name: new FormControl('', [Validators.required, this.emptyStringValidator]),
@@ -29,6 +29,20 @@ export class CreateProductComponent implements OnInit {
   loading = false;
   expiryMinDate: Date = new Date();
   confirmDialogVisible = false;
+  @ViewChild('action')
+  action!: NgxScannerQrcodeComponent;
+  public config: ScannerQRCodeConfig = {
+    vibrate: 400,
+    deviceActive: 1,
+    constraints: {
+      facingMode: "environment",
+      audio: false,
+      video: {
+        width: window.innerWidth
+      }
+    }
+  };
+  showVideo = false;
 
   constructor(private fb: FormBuilder, private managerService: ManagerService, private productService: ProductService, private messageService: MessageService) { }
 
@@ -38,9 +52,16 @@ export class CreateProductComponent implements OnInit {
     });
   }
 
-  addParentUid() {
+  getParentUid() {
     const parentUid = this.form.controls['parentUid'].value?.toLocaleLowerCase().trim();
 
+    if (parentUid) {
+      this.addProductParentUid(parentUid);
+      this.form.controls['parentUid'].setValue('');
+    }
+  }
+
+  addProductParentUid(parentUid: string) {
     if (parentUid && !this.parentUids.includes(parentUid)) {
       this.productService.getProduct(parentUid).then((product: any) => {
         if (product) {
@@ -50,14 +71,35 @@ export class CreateProductComponent implements OnInit {
         }
       }).catch((error: any) => {
         console.log(error);
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: "Encountered an error while fetching the product. Please try again." });
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.reason });
       });
     }
+  }
+
+
+  ngOnDestroy(): void {
+    this.action.stop();
   }
 
   removeParentUid(parentUid: string) {
     this.parentUids = this.parentUids.filter((uid: string) => uid !== parentUid);
     this.parents = this.parents.filter((product: any) => product.uid !== parentUid);
+  }
+
+  startAction() {
+    this.showVideo = true;
+    this.action.start();
+  }
+
+  onEvent(event: any) {
+    const parentUid = event[0].value.trim().toLowerCase();
+
+    if (parentUid) {
+      this.addProductParentUid(parentUid);
+
+      this.showVideo = false;
+      this.action.stop();
+    }
   }
 
   submit() {

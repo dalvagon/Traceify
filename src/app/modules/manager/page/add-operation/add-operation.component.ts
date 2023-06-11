@@ -84,10 +84,10 @@ export class AddOperationComponent implements OnInit, OnDestroy {
   }
 
   onEvent(event: any) {
-    this.uid = event[0].value.trim().toLowerCase();
+    const productOperationUid = event[0].value.trim().toLowerCase();
 
-    if (this.uid) {
-      this.addOperationProduct(this.uid);
+    if (productOperationUid) {
+      this.addOperationProduct(productOperationUid);
 
       this.showVideo = false;
       this.action.stop();

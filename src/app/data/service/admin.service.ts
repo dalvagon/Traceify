@@ -7,13 +7,21 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AdminService {
-
   constructor(private contractsService: ContractsService, private ipfs: IpfsService, private util: UtilService) { }
 
+  /**
+   * Return true if the current user is an admin
+   * @returns true if the current user is an admin
+   */
   public async isAdmin() {
     return await this.contractsService.hasRole('DEFAULT_ADMIN_ROLE');
   }
 
+  /**
+   * Send a request to the contract to add a new manager
+   * @param request the request object
+   * @returns the result of the transaction
+   */
   public async requestManagerRole(request: any) {
     const contract = await this.contractsService.getContractInstance();
 
@@ -25,6 +33,10 @@ export class AdminService {
     }
   }
 
+  /**
+   * Get the list of pending manager requests
+   * @returns the list of pending manager requests
+   */
   public async getPendingManagerRequestAddresses() {
     const contract = await this.contractsService.getContractInstance();
 
@@ -33,6 +45,10 @@ export class AdminService {
     }
   }
 
+  /**
+   * Get the list of approved manager requests
+   * @returns the list of approved manager requests
+   */
   public async getApprovedManagerRequestAddresses() {
     const contract = await this.contractsService.getContractInstance();
 
@@ -41,6 +57,11 @@ export class AdminService {
     }
   }
 
+  /**
+   * Get a manager request by address
+   * @param address the address of the manager
+   * @returns the manager request
+   */
   public async getManagerRequest(address: string) {
     const contract = await this.contractsService.getContractInstance();
 
@@ -65,6 +86,11 @@ export class AdminService {
     return null;
   }
 
+  /**
+   * Approve a manager request
+   * @param address the address of the manager
+   * @returns the result of the transaction
+   */
   public async approveManagerRequest(address: string) {
     const contract = await this.contractsService.getContractInstance();
 
@@ -73,6 +99,11 @@ export class AdminService {
     }
   }
 
+  /**
+   * Deny a manager request
+   * @param address the address of the manager
+   * @returns the result of the transaction
+   */
   public async denyManagerRequest(address: string) {
     const contract = await this.contractsService.getContractInstance();
 

@@ -22,6 +22,9 @@ export class AdminComponent implements OnInit {
     this.getApprovedRequests();
   }
 
+  /**
+   * Get the list of pending manager requests
+   */
   getPendingRequests() {
     this.adminService.getPendingManagerRequestAddresses().then(async (addresses) => {
       for (const address of addresses) {
@@ -35,6 +38,9 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  /**
+   * Get the list of approved manager requests
+   */
   getApprovedRequests() {
     this.adminService.getApprovedManagerRequestAddresses().then(async (addresses) => {
       for (const address of addresses) {
@@ -48,16 +54,26 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  /**
+   * Switch to the pending requests tab
+   */
   switchToPendingRequests() {
     this.showPedingRequests = true;
     this.showApprovedRequests = false;
   }
 
+  /**
+   * Switch to the approved requests tab
+   */
   switchToApprovedRequests() {
     this.showPedingRequests = false;
     this.showApprovedRequests = true;
   }
 
+  /**
+   * Approve a manager request by address
+   * @param address the address of the request to approve
+   */
   approveRequest(address: any) {
     this.adminService.approveManagerRequest(address).then(() => {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Request approved. The request may still appear in the inbox until the transaction is completed.' });
@@ -68,6 +84,10 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  /**
+   * Reject a manager request by address
+   * @param address the address of the request to reject
+   */
   rejectRequest(address: any) {
     this.adminService.denyManagerRequest(address).then(() => {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'The request may still appear in the inbox until the transaction is completed.' });
@@ -78,6 +98,10 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  /**
+   * Switch the show company and role flag for a pending request
+   * @param address the address of the request to switch
+   */
   switchShowCompnayAndRoleForPendingRequests(address: any) {
     this.pendingRequests.forEach((request) => {
       if (request.address === address) {
@@ -86,6 +110,10 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  /**
+   * Switch the show company and role flag for an approved request
+   * @param address the address of the request to switch
+   */
   switchShowCompnayAndRoleForApprovedRequests(address: any) {
     this.approvedRequests.forEach((request) => {
       if (request.address === address) {
@@ -94,6 +122,11 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  /**
+   * Get the proper article for a role
+   * @param role the role to get the article for
+   * @returns the article
+   */
   getAorAn(role: string) {
     role = role.toLowerCase();
     if (role.startsWith('a') || role.startsWith('e') || role.startsWith('i') || role.startsWith('o') || role.startsWith('u')) {
@@ -128,6 +161,11 @@ export class AdminComponent implements OnInit {
     return Math.floor(diff / 1000 / 60 / 60 / 24 / 7);
   }
 
+  /**
+   * Get the difference between a timestamp and now in a human readable format
+   * @param timestamp the timestamp to get the difference for
+   * @returns the difference in a human readable format
+   */
   difference(timestamp: number) {
     const seconds = this.differenceInSeconds(timestamp);
     if (seconds < 60) {

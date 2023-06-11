@@ -10,11 +10,17 @@ import { formatBytes32String } from 'ethers/lib/utils';
 export class ProductService {
   constructor(private contractsService: ContractsService, private ipfs: IpfsService, private util: UtilService) { }
 
+  /**
+   * Get the product details from IPFS
+   * @param uid the product UID
+   * @returns the product details
+   */
   public async getProduct(uid: any) {
     const contract = await this.contractsService.getContractInstanceWithoutSigner();
 
     if (typeof contract !== 'undefined') {
       const product = await contract['getProduct'](uid);
+      console.log(product);
       const ipfsHash = this.util.getIpfsHashFromBytes32(product[1]);
       const ipfsObj = await this.ipfs.downloadData(ipfsHash);
 
@@ -37,6 +43,11 @@ export class ProductService {
     return null;
   }
 
+  /**
+   * Get an operation from IPFS
+   * @param bytes the operation bytes
+   * @returns
+   */
   public async getOperation(bytes: any) {
     const ipfsHash = this.util.getIpfsHashFromBytes32(bytes);
     const ipfsObj = await this.ipfs.downloadData(ipfsHash);

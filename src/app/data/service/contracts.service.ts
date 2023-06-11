@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
+import { MessageService } from 'primeng/api';
 import { contract } from 'src/contracts/contract';
 
 @Injectable({
@@ -9,7 +10,7 @@ export class ContractsService {
   private ethereum: any;
   private provider: any;
 
-  constructor() {
+  constructor(private messageService: MessageService) {
     this.createProvider();
   }
 
@@ -30,13 +31,20 @@ export class ContractsService {
     }
   }
 
+  /**
+   * Handle the ethereum object injected by metamask
+   */
   private handleEthereum() {
     const ethereum = (window as any).ethereum;
     if (typeof ethereum !== 'undefined') {
       this.ethereum = ethereum;
       this.createProvider();
     } else {
-      console.log('No web3? You should consider trying MetaMask!');
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Please install MetaMask to use this dApp!',
+      });
     }
   }
 
@@ -52,15 +60,7 @@ export class ContractsService {
   }
 
   /**
-   * Returns the provider
-   * @returns the provider
-   */
-  public getProvider() {
-    return this.provider;
-  }
-
-  /**
-   * Returns the signer if there is an account connected
+   * Get the signer from the provider
    * @returns the signer
    */
   private getSigner() {
@@ -73,6 +73,10 @@ export class ContractsService {
       });
   }
 
+  /**
+   * Get a contract instance
+   * @returns a contract instance
+   */
   public async getContractInstance() {
     const signer = await this.getSigner();
 
@@ -83,10 +87,19 @@ export class ContractsService {
     return new ethers.Contract(contract.address, contract.abi, signer);
   }
 
+  /**
+   * Get a contract instance without signer
+   * @returns a contract instance without signer
+   */
   public async getContractInstanceWithoutSigner() {
-    return new ethers.Contract(contract.address, contract.abi, this.getProvider());
+    return new ethers.Contract(contract.address, contract.abi, this.provider);
   }
 
+  /**
+   * Check if the current user has a role
+   * @param role the role to check
+   * @returns true if the current user has the role
+   */
   public async hasRole(role: any) {
     const contract = await this.getContractInstance();
 

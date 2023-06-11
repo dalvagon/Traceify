@@ -13,6 +13,10 @@ export class IpfsService {
     this.createClient();
   }
 
+  /**
+   * Create an IPFS client
+   * @returns the IPFS client
+   */
   createClient() {
     const projectId = environment.infuraProjectId;
     const projectSecret = environment.infuraProjectSecret;
@@ -29,10 +33,20 @@ export class IpfsService {
     });
   }
 
+  /**
+   * Upload data to IPFS
+   * @param data the data to be uploaded
+   * @returns the IPFS CID
+   */
   uploadData(data: any) {
     return this.client.add(data);
   }
 
+  /**
+   * Download data from IPFS
+   * @param cid the IPFS CID
+   * @returns the data
+   */
   async downloadData(cid: string) {
     const resp = this.client.cat(cid);
 
@@ -45,6 +59,11 @@ export class IpfsService {
     return JSON.parse(buffer);
   }
 
+  /**
+   * Unpin data from IPFS
+   * @param cid the IPFS CID
+   * @returns the result of the operation
+   */
   async removeData(cid: string) {
     return this.client.pin.rm(cid);
   }

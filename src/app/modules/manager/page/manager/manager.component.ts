@@ -58,8 +58,8 @@ export class ManagerComponent implements OnInit {
                       name: product.name,
                       category: product.category,
                       manufacturer: product.manufacturer,
-                      manufacturingDate: product.manufacturingDate,
-                      expiryDate: product.expiryDate,
+                      manufacturingDate: product.manufacturingDate ?? 'N/A',
+                      expiryDate: product.expiryDate ?? 'N/A',
                       description: product.description,
                       parents: parents,
                     });

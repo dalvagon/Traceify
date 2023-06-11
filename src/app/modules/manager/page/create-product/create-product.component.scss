@@ -55,6 +55,22 @@
           }
         }
 
+        .hide-qr-scanner {
+          width: 0 !important;
+          height: 0 !important;
+        }
+
+        .show-qr-scanner {
+          width: 100%;
+          height: 100%;
+        }
+
+        .scan-button {
+          display: block;
+          margin: 0 auto !important;
+          margin-top: 10px !important;
+        }
+
         .derived {
           .derived-item {
             display: flex;
