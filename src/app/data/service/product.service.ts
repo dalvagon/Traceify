@@ -20,7 +20,6 @@ export class ProductService {
 
     if (typeof contract !== 'undefined') {
       const product = await contract['getProduct'](uid);
-      console.log(product);
       const ipfsHash = this.util.getIpfsHashFromBytes32(product[1]);
       const ipfsObj = await this.ipfs.downloadData(ipfsHash);
 

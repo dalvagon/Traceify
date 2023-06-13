@@ -1,5 +1,5 @@
 export const contract = {
-  address: '0xeb5Bd15225700C719b3eeA74189CfD36cA027cA0',
+  address: '0xA4c6525EFdee0c9619b29a442644F23dEab6A866',
   abi: [
     {
       "anonymous": false,
@@ -534,7 +534,7 @@ export const contract = {
         },
         {
           "internalType": "bytes32",
-          "name": "ipfsRequestHash",
+          "name": "ipfsHash",
           "type": "bytes32"
         },
         {
@@ -612,7 +612,7 @@ export const contract = {
       "inputs": [
         {
           "internalType": "bytes32",
-          "name": "ipfsRequestHash",
+          "name": "ipfsHash",
           "type": "bytes32"
         }
       ],

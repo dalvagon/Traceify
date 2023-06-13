@@ -82,7 +82,7 @@ export class RequestComponent implements OnInit {
       }
       ).catch((error: any) => {
         console.log(error);
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Encountered an error while requesting manager role. If you already requested, please wait for the approval.' })
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.reason })
         this.loading = false;
       });
     }

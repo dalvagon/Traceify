@@ -9,6 +9,7 @@
   user-select: none;
   font-weight: bolder;
   text-transform: uppercase !important;
+  white-space: pre-line !important;
 
   &::-webkit-scrollbar {
     width: 10px;
