@@ -94,7 +94,6 @@ export class ManagerComponent implements OnInit {
       this.loading = true;
       this.submitted = true;
       this.managerService.addManager(uid, manager).then((result: any) => {
-        console.log(result);
         this.loading = false;
         this.submitted = false;
         this.addManagerDialogVisible = false;
@@ -103,5 +102,15 @@ export class ManagerComponent implements OnInit {
         this.loading = false;
       });
     }
+  }
+
+  renounceManager(uid: any) {
+    this.loading = true;
+    this.managerService.renounceManager(uid).then((result: any) => {
+      this.loading = false;
+    }).catch((error: any) => {
+      this.messageServie.add({ severity: 'error', summary: 'Error', detail: error.reason });
+      this.loading = false;
+    });
   }
 }

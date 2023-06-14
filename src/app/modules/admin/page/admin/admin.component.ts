@@ -137,7 +137,8 @@ export class AdminComponent implements OnInit {
   }
 
   differenceInSeconds(timestamp: number) {
-    const diff = Date.now() - timestamp;
+    const diff = Date.now() - timestamp < 0 ? 0 : Date.now() - timestamp;
+
     return Math.floor(diff / 1000);
   }
 

@@ -15,6 +15,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   transactionsOptions: any;
   transactionsChart: any;
   dataLoaded = false;
+  balance = 0;
 
   constructor(private statsService: StatsService, private walletService: WalletService) { }
 
@@ -26,7 +27,8 @@ export class StatsComponent implements OnInit, OnDestroy {
             this.account = account;
             this.dataLoaded = false;
             this.transactions = [];
-            this.getTransactions();
+            this.getTransactions(account);
+            this.getBalance(account);
           }
         });
     }
@@ -38,29 +40,29 @@ export class StatsComponent implements OnInit, OnDestroy {
     }
   }
 
-  getTransactions() {
-    this.statsService.getTransactions(this.account).pipe(first()).subscribe((res: any) => {
+  getTransactions(account: string) {
+    this.statsService.getTransactions().pipe(first()).subscribe((res: any) => {
       res.result.forEach((tx: any) => {
-        this.statsService.getUsdPrice().subscribe((fee: any) => {
-          this.transactions.push({
-            timestamp: new Date(tx.timeStamp * 1000).toLocaleString(),
-            totalFee: (tx.gasPrice * tx.gasUsed / 1000000000000000000 * fee.USD).toFixed(5),
-          })
-        });
+        if (tx.from === account || tx.to === account) {
+          console.log(tx);
+          this.statsService.getUsdPrice().subscribe((fee: any) => {
+            this.transactions.push({
+              timestamp: new Date(tx.timeStamp * 1000).toLocaleString(),
+              totalFee: (tx.gasPrice * tx.gasUsed / 1000000000000000000 * fee.USD).toFixed(5),
+            })
+          });
+        }
       });
-      this.transactionsOptions = {
-        theme: "light2",
-        animationEnabled: true,
-        zoomEnabled: true,
-        title: {
-          text: "Market Capitalization of ACME Corp"
-        },
-        data: [{
-          type: "line",
-          dataPoints: this.transactions
-        }]
-      };
       this.dataLoaded = true;
+    });
+  }
+
+  getBalance(account: string) {
+    this.statsService.getBalance(account).pipe(first()).subscribe((res: any) => {
+      console.log(res);
+      this.statsService.getUsdPrice().subscribe((usd: any) => {
+        this.balance = res.result / 1000000000000000000 * usd.USD;
+      });
     });
   }
 }

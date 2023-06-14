@@ -104,4 +104,12 @@ export class ManagerService {
       return contract['addManagerForProduct'](uid, manager);
     }
   }
+
+  public async renounceManager(uid: any) {
+    const contract = await this.contractsService.getContractInstance();
+
+    if (typeof contract !== 'undefined') {
+      return contract['renounceRoleForProduct'](uid);
+    }
+  }
 }

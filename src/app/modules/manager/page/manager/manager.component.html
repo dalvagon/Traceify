@@ -65,8 +65,13 @@
                 </form>
               </p-dialog>
 
-              <button type="button" pButton label="Add manager" class="button-filled transfer-ownership-button"
-                (click)="addManager()"></button>
+              <div class="management">
+                <button type="button" pButton label="Add manager" class="button-filled add-manager-button"
+                  (click)="addManager()"></button>
+
+                <button type="button" pButton label="Renounce manager role" class="button-filled renounce-manager-role"
+                  (click)="renounceManager(product.uid)"></button>
+              </div>
             </div>
           </div>
         </td>

@@ -125,8 +125,13 @@
                 display: flex;
                 flex-direction: row;
 
+                .management {
+                  margin-left: auto !important;
+                }
+
                 .add-operation-button,
-                .transfer-ownership-button {
+                .add-manager-button,
+                .renounce-manager-role {
                   margin: 10px !important;
                 }
 

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { contract } from 'src/contracts/contract';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,11 @@ export class StatsService {
 
   constructor(private http: HttpClient) { }
 
-  getTransactions(address: string) {
+  getTransactions() {
     const params = {
       module: 'account',
       action: 'txlist',
-      address: address,
+      address: contract.address,
       startblock: 0,
       endblock: 99999999,
       sort: 'asc',
@@ -27,6 +28,19 @@ export class StatsService {
 
     return this.http.get(this.ETHSCAN_API_URL, { params });
   }
+
+  getBalance(account: string) {
+    const params = {
+      module: 'account',
+      action: 'balance',
+      address: account,
+      tag: 'latest',
+      apiKey: this.ETHSCAN_API_KEY
+    }
+
+    return this.http.get(this.ETHSCAN_API_URL, { params });
+  }
+
 
   getUsdPrice() {
     const params = {

@@ -1,5 +1,5 @@
 import { AdminService } from 'src/app/data/service/admin.service';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { WalletService } from 'src/app/data/service/wallet.service';
 import { MessageService } from 'primeng/api';
@@ -88,7 +88,7 @@ export class RequestComponent implements OnInit {
     }
   }
 
-  emptyStringValidator(control: FormControl) {
+  emptyStringValidator(control: FormControl): ValidationErrors | null {
     return (control.value || '').trim().length === 0 ? { 'emptyString': true } : null;
   }
 }

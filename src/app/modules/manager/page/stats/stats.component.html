@@ -1,3 +1,6 @@
 <div class="container" *ngIf="dataLoaded">
-  <canvasjs-chart [options]="transactionsOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+  {{ balance }}
+  <div *ngFor="let tx of transactions">
+    {{ tx.timestamp }}
+  </div>
 </div>
