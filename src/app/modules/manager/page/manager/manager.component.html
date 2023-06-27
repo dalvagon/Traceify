@@ -6,7 +6,7 @@
 <div class="container" *ngIf="dataLoaded">
   <div class="header">
     <div class="title">Your products</div>
-    <button type="button" pButton label="Create a new product" class="button-outline"
+    <button type="button" pButton label="Register a new product" class="button-outline"
       [routerLink]="'/manager/create-product'"></button>
   </div>
   <p-table [columns]="cols" [value]="products" dataKey="uid" [paginator]="true" [rows]="10"

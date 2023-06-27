@@ -112,6 +112,7 @@ export class AddOperationComponent implements OnInit, OnDestroy {
         this.form.reset();
         this.form.controls['uid'].setValue(this.uid);
         this.submitted = false;
+        this.operationProductUids = [];
         this.operationProducts = [];
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Operation added successfully. It will appear in the product\'s history after the transaction is complete.' });
       }).catch((error: any) => {

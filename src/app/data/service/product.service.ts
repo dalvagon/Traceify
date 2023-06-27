@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ContractsService } from './contracts.service';
 import { IpfsService } from './ipfs.service';
 import { UtilService } from './util.service';
-import { formatBytes32String } from 'ethers/lib/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +55,7 @@ export class ProductService {
       category: ipfsObj.category,
       date: new Date(ipfsObj.date).toDateString(),
       description: ipfsObj.description,
-      operationProducts: ipfsObj.operationProductUids
+      operationProducts: ipfsObj.operationProductUids,
     };
   }
 }

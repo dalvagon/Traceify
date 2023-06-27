@@ -5,7 +5,7 @@
 
 <div class="container" *ngIf="dataLoaded">
   <div class="null-product" *ngIf="product === null">Product with this uid does not exist.</div>
-  <p-card *ngIf="product" [header]="product.name" [subheader]="product.timestamp" styleClass="product">
+  <p-card *ngIf="product" [header]="product.name" styleClass="product">
     <div *ngIf="showProductDescription" class="content">
       <div class="description">
         {{ product.description }}
@@ -28,11 +28,11 @@
           {{ parent.name }} <i class="pi pi-external-link" [routerLink]="['/product', parent.uid]"></i>
         </div>
       </div>
-      <qrcode *ngIf="showProductQrCode" [qrdata]="product.uid" [errorCorrectionLevel]="'M'" [allowEmptyString]="true"
+      <!-- <qrcode *ngIf="showProductQrCode" [qrdata]="product.uid" [errorCorrectionLevel]="'M'" [allowEmptyString]="true"
         [width]="100" colorDark="#06131a" colorLight="#ECF8BA">
-      </qrcode>
-      <button pButton [label]="showProductQrCode ? 'Hide QR code' : 'Show QR code'" class="button-filled-reversed"
-        (click)="toggleProductQrCode()"></button>
+      </qrcode> -->
+      <!-- <button pButton [label]="showProductQrCode ? 'Hide QR code' : 'Show QR code'" class="button-filled-reversed"
+        (click)="toggleProductQrCode()"></button> -->
     </div>
     <button pButton [label]="showProductDescription ? 'Read less' : 'Read more'" class="button-outline-reversed"
       (click)="toggleProductDescription()"></button>
@@ -47,7 +47,6 @@
       <p-card [header]="event.title" [subheader]="event.date">
         <div *ngIf="event.showDescription" class="description">
           {{ event.description }}
-
           <div *ngIf="event.operationProducts.length > 0" class="operation-products">
             <p>The following products were used in this operation:</p>
             <div *ngFor="let product of event.operationProducts" class="operation-product">

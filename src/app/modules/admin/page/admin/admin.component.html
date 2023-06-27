@@ -13,8 +13,9 @@
         <div class="pending-request" *ngFor="let request of pendingRequests">
           <div class="header">
             <div>
-              <div class="name" (click)="switchShowCompnayAndRoleForPendingRequests(request.address)">
+              <div class="name">
                 {{ request.name }}
+                <i class="pi pi-caret-down" (click)="switchShowCompnayAndRoleForPendingRequests(request.address)"></i>
               </div>
               <div class="company-and-role" *ngIf="request.showCompanyAndRole">works as {{ getAorAn(request.role) }} at
                 {{ request.company }}</div>
@@ -48,8 +49,9 @@
         <div class="approved-request" *ngFor="let request of approvedRequests">
           <div class="header">
             <div>
-              <div class="name" (click)="switchShowCompnayAndRoleForApprovedRequests(request.address)">
+              <div class="name">
                 {{ request.name }}
+                <i class="pi pi-caret-down" (click)="switchShowCompnayAndRoleForApprovedRequests(request.address)"></i>
               </div>
               <div class="company-and-role" *ngIf="request.showCompanyAndRole">works as {{ getAorAn(request.role) }} at
                 {{ request.company }}</div>

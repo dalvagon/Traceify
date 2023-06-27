@@ -47,13 +47,11 @@
           }
 
           .name {
-            &:hover {
-              cursor: pointer;
-            }
+            font-size: 25px;
           }
 
           .email {
-            font-size: 10px;
+            font-size: 15px;
             opacity: 0.7;
             color: $primary;
             background-color: $secondary;
@@ -63,6 +61,7 @@
 
           .company-and-role {
             font-size: 10px;
+            margin: 5px;
           }
 
           .timestamp {
@@ -72,7 +71,7 @@
 
         .purpose {
           margin-top: 10px;
-          font-size: 15px;
+          font-size: 10px;
         }
 
         .buttons {
@@ -110,13 +109,19 @@
           }
 
           .name {
-            &:hover {
-              cursor: pointer;
+            font-size: 25px;
+
+            i {
+              font-size: 20px;
+
+              &:hover {
+                cursor: pointer;
+              }
             }
           }
 
           .email {
-            font-size: 10px;
+            font-size: 15px;
             opacity: 0.7;
             color: $primary;
             background-color: $secondary;
@@ -126,6 +131,7 @@
 
           .company-and-role {
             font-size: 10px;
+            margin: 5px;
           }
 
           .timestamp {
@@ -135,7 +141,7 @@
 
         .purpose {
           margin-top: 10px;
-          font-size: 15px;
+          font-size: 10px;
         }
 
         .buttons {

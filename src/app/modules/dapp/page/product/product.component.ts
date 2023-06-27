@@ -46,20 +46,18 @@ export class ProductComponent implements OnInit {
     let events = [];
 
     for (let opArr of this.product.operations) {
-      const uid = opArr[0];
       const timestamp = new Date(opArr[2] * 1000).toLocaleDateString();
       const op = await this.productService.getOperation(opArr[1]);
       const operationProducts = await this.getOperationProducts(op.operationProducts);
 
       events.push({
-        uid: uid,
         title: op.name,
         icon: 'pi pi-circle',
         date: op.date,
         description: op.description,
-        timestamp: timestamp,
         operationProducts: operationProducts,
         showDescription: false,
+        timestamp: timestamp,
       })
     }
 
